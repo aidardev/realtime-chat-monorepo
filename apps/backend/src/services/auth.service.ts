@@ -26,6 +26,7 @@ export class AuthService {
                     email: data.email,
                     username: data.username,
                     password: hashedPassword,
+                    name: data.name,
                 },
                 select: {
                     id: true,
@@ -33,6 +34,7 @@ export class AuthService {
                     username: true,
                     role: true,
                     createdAt: true,
+                    name: true,
                 },
             });
 
