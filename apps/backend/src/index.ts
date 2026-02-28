@@ -5,9 +5,11 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
+import path from 'path';
 import { CORS_OPTIONS } from './config/cors.config';
 import { errorMiddleware } from './middlewares/error.middleware';
 import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
 app.use(cookieParser());
@@ -19,7 +21,9 @@ const io = new Server(httpServer, {
 
 app.use(cors(CORS_OPTIONS));
 app.use(express.json());
+app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads')));
 app.use('/api/auth', authRoutes);
+app.use('/api/me', userRoutes);
 
 app.get('/', async (req, res) => {
     const users = await prisma.user.findMany();

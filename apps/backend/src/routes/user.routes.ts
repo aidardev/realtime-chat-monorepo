@@ -1,0 +1,15 @@
+import { Router } from 'express';
+import { uploadAvatarMiddleware } from '../config/multer.config';
+import { userController } from '../controllers/user.controller';
+import { authMiddleware } from '../middlewares/auth.middleware';
+
+const router: Router = Router();
+
+router.post(
+    '/avatar',
+    authMiddleware,
+    uploadAvatarMiddleware.single('avatar'),
+    userController.uploadAvatar
+);
+
+export default router;

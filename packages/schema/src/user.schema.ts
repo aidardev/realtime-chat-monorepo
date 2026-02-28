@@ -8,6 +8,7 @@ export const UserSchema = z.object({
     createdAt: z.string(),
     name: z.string().optional(),
     avatar: z.string().optional(),
+    bio: z.string().optional(),
 });
 
 export type User = z.infer<typeof UserSchema>;
