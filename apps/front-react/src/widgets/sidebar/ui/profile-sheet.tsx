@@ -1,11 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
+import { AvatarUploader } from '@/features/user/update-avatar';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import { Textarea } from '@/shared/ui/textarea';
 import type { User } from '@realtime-chat/schema';
-import { Camera, Check, Edit2 } from 'lucide-react';
+import { Check, Edit2 } from 'lucide-react';
 import { useState } from 'react';
 
 interface ProfileSheetProps {
@@ -31,23 +31,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
 
             <div className="flex flex-col gap-6 overflow-y-auto bg-muted/10 h-full pb-6">
                 <div className="flex justify-center py-6">
-                    <div className="relative group cursor-pointer">
-                        <Avatar className="h-40 w-40 border-4 border-background shadow-sm">
-                            <AvatarImage
-                                src={user.avatar}
-                                className="object-cover"
-                            />
-                            <AvatarFallback className="text-4xl bg-muted text-muted-foreground">
-                                {user.username?.[0]?.toUpperCase()}
-                            </AvatarFallback>
-                        </Avatar>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-full bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 text-white font-medium">
-                            <Camera className="size-8" />
-                            <span className="text-xs text-center px-2">
-                                Изменить <br /> фото
-                            </span>
-                        </div>
-                    </div>
+                    <AvatarUploader user={user} />
                 </div>
 
                 <div className="bg-background px-6 py-4 shadow-sm space-y-3">

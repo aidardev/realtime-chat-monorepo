@@ -32,7 +32,7 @@ export type AuthResponseData = {
     user: User;
 };
 
-export type GetMeResponseData = {
+export type UserResponseData = {
     user: User;
 };
 

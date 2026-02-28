@@ -1,3 +1,4 @@
+import { uploadAvatarApi } from '@/features/user/update-avatar/api/upload-avatar-api';
 import type { User } from '@realtime-chat/schema';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { sessionApi } from '../api/session-api';
@@ -41,6 +42,15 @@ export const sessionSlice = createSlice({
             (state, { payload }) => {
                 state.user = payload;
                 state.isAuth = true;
+            }
+        );
+
+        builder.addMatcher(
+            uploadAvatarApi.endpoints.uploadAvatar.matchFulfilled,
+            (state, { payload }) => {
+                if (state.user) {
+                    state.user.avatar = payload.avatar;
+                }
             }
         );
     },

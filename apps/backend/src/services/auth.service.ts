@@ -35,6 +35,8 @@ export class AuthService {
                     role: true,
                     createdAt: true,
                     name: true,
+                    avatar: true,
+                    bio: true,
                 },
             });
 
@@ -152,6 +154,8 @@ export class AuthService {
                 role: true,
                 createdAt: true,
                 name: true,
+                avatar: true,
+                bio: true,
             },
         });
 

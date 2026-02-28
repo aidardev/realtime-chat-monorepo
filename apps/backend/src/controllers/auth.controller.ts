@@ -5,9 +5,6 @@ import { REFRESH_COOKIE_OPTIONS } from '../config/cookie.config';
 import { AppError } from '../lib/exceptions/AppError';
 import { authService } from '../services/auth.service';
 
-export const sleep = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
 export class AuthController {
     register = async (req: Request, res: Response) => {
         const validatedData = RegisterSchema.parse(req.body);
