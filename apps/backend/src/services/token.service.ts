@@ -25,19 +25,7 @@ class TokenService {
         tx?: Prisma.TransactionClient
     ) {
         const db = tx || prisma;
-        const tokenData = await db.token.findFirst({
-            where: { userId, userAgent },
-        });
 
-        // If a session already exists for this device/user-agent, update the token
-        if (tokenData) {
-            return db.token.update({
-                where: { id: tokenData.id },
-                data: { refreshToken },
-            });
-        }
-
-        // Otherwise, create a new session record
         return db.token.create({
             data: {
                 userId,
