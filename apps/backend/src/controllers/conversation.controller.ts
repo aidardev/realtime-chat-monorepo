@@ -3,10 +3,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { requireUser } from '../lib/helpers';
 import { conversationService } from '../services/conversation.service';
-
-type ConversationParams = {
-    id: string;
-};
+import { IdParams } from '../types/http.types';
 
 class ConversationController {
     getConversations = async (req: Request, res: Response) => {
@@ -24,10 +21,7 @@ class ConversationController {
         });
     };
 
-    getConversation = async (
-        req: Request<ConversationParams>,
-        res: Response
-    ) => {
+    getConversation = async (req: Request<IdParams>, res: Response) => {
         const user = requireUser(req);
         const { id } = req.params;
 
