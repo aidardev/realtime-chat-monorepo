@@ -96,16 +96,10 @@ export class ConversationService {
                     participants: {
                         include: {
                             user: {
-                                select: {
-                                    id: true,
-                                    username: true,
-                                    name: true,
-                                    avatar: true,
-                                },
+                                select: conversationUserSelect,
                             },
                         },
                     },
-                    messages: { take: 1, orderBy: { createdAt: 'desc' } },
                 },
             });
 

@@ -11,4 +11,11 @@ export const UserSchema = z.object({
     bio: z.string().optional(),
 });
 
+export const PublicUserSchema = UserSchema.pick({
+    id: true,
+    username: true,
+    name: true,
+    avatar: true,
+});
+
 export type User = z.infer<typeof UserSchema>;

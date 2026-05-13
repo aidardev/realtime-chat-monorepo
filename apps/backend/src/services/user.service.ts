@@ -3,7 +3,10 @@ import { SearchInput } from '@realtime-chat/schema';
 import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import path from 'path';
-import { publicUserSelect } from '../lib/db-selects/user.select';
+import {
+    conversationUserSelect,
+    publicUserSelect,
+} from '../lib/db-selects/user.select';
 import { AppError } from '../lib/exceptions/AppError';
 
 class UserService {
@@ -87,12 +90,7 @@ class UserService {
                     mode: 'insensitive',
                 },
             },
-            select: {
-                id: true,
-                username: true,
-                avatar: true,
-                name: true,
-            },
+            select: conversationUserSelect,
         });
     }
 }

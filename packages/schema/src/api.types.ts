@@ -1,4 +1,7 @@
-import { Conversation } from './conversation.schema';
+import {
+    ConversationDetails,
+    ConversationListItem,
+} from './conversation.schema';
 import { User } from './user.schema';
 
 export interface FieldError {
@@ -41,10 +44,14 @@ export type UsersResponseData = {
     users: User[];
 };
 
-export type RefreshTokenData = {
+export type RefreshTokenResponseData = {
     accessToken: string;
 };
 
-export type ConversationData = {
-    conversation: Conversation;
+export type ConversationResponseData = {
+    conversation: ConversationDetails;
+};
+
+export type ConversationsResponseData = {
+    conversations: ConversationListItem[];
 };

@@ -1,6 +1,9 @@
 import type { RootState } from '@/app/store/store';
 import { logout, tokenReceived } from '@/entities/session';
-import type { ApiDataResponse, RefreshTokenData } from '@realtime-chat/schema';
+import type {
+    ApiDataResponse,
+    RefreshTokenResponseData,
+} from '@realtime-chat/schema';
 import {
     createApi,
     fetchBaseQuery,
@@ -45,7 +48,7 @@ const baseQueryWithReauth: BaseQueryFn<
                     extraOptions
                 );
                 const data =
-                    refreshResult.data as ApiDataResponse<RefreshTokenData>;
+                    refreshResult.data as ApiDataResponse<RefreshTokenResponseData>;
                 if (data && data.data) {
                     const newAccessToken = data.data.accessToken;
                     api.dispatch(tokenReceived(newAccessToken));

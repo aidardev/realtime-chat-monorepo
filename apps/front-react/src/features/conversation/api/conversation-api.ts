@@ -1,14 +1,16 @@
 import { baseApi } from '@/shared/api/base-api';
 import type {
     ApiDataResponse,
-    ConversationData,
+    ConversationListItem,
     ConversationRequest,
+    ConversationResponseData,
+    ConversationsResponseData,
 } from '@realtime-chat/schema';
 
 export const conversationApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        start: build.mutation<
-            ApiDataResponse<ConversationData>,
+        startConversation: build.mutation<
+            ApiDataResponse<ConversationResponseData>,
             ConversationRequest
         >({
             query: (body) => ({
@@ -17,7 +19,16 @@ export const conversationApi = baseApi.injectEndpoints({
                 method: 'post',
             }),
         }),
+        getConversations: build.query<ConversationListItem[], void>({
+            query: () => '/conversations',
+            transformResponse: (
+                response: ApiDataResponse<ConversationsResponseData>
+            ) => {
+                return response.data.conversations;
+            },
+        }),
     }),
 });
 
-export const { useStartMutation } = conversationApi;
+export const { useStartConversationMutation, useGetConversationsQuery } =
+    conversationApi;
