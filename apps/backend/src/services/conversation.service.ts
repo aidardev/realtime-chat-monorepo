@@ -6,7 +6,7 @@ import { AppError } from '../lib/exceptions/AppError';
 
 export class ConversationService {
     async getConversations(userId: string) {
-        return await prisma.conversation.findMany({
+        const conversations = await prisma.conversation.findMany({
             where: {
                 participants: {
                     some: {
@@ -33,6 +33,11 @@ export class ConversationService {
                 updatedAt: 'desc',
             },
         });
+
+        return conversations.map((conversation) => ({
+            ...conversation,
+            lastMessage: conversation.messages[0] ?? null,
+        }));
     }
 
     async getConversationById(conversationId: string, userId: string) {
@@ -51,12 +56,6 @@ export class ConversationService {
                         user: {
                             select: conversationUserSelect,
                         },
-                    },
-                },
-                messages: {
-                    take: 1,
-                    orderBy: {
-                        createdAt: 'desc',
                     },
                 },
             },
