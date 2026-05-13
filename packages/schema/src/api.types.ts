@@ -1,3 +1,4 @@
+import { Conversation } from './conversation.schema';
 import { User } from './user.schema';
 
 export interface FieldError {
@@ -42,4 +43,8 @@ export type UsersResponseData = {
 
 export type RefreshTokenData = {
     accessToken: string;
+};
+
+export type ConversationData = {
+    conversation: Conversation;
 };

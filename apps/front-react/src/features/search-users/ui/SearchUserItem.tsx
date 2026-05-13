@@ -1,3 +1,4 @@
+import { useStartMutation } from '@/features/conversation/api/conversation-api';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import type { User } from '@realtime-chat/schema';
 import { UserPlus } from 'lucide-react';
@@ -7,11 +8,16 @@ interface SearchUserItemProps {
 }
 
 export function SearchUserItem({ user }: SearchUserItemProps) {
+    const [start, { isLoading }] = useStartMutation();
+
     return (
         <button
             className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-colors group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => {
-                /* Логика */
+                start({
+                    userIds: [user.id],
+                    isGroup: false,
+                });
             }}
         >
             <div className="flex items-center gap-3 min-w-0">
