@@ -17,10 +17,25 @@ export const sessionApi = baseApi.injectEndpoints({
                 return response.data.user;
             },
         }),
+
         logout: build.mutation<ApiMessageResponse, void>({
             query: () => ({ url: '/auth/logout', method: 'post' }),
+        }),
+
+        uploadAvatar: build.mutation<User, FormData>({
+            query: (formData) => ({
+                url: '/me/avatar',
+                body: formData,
+                method: 'post',
+            }),
+            transformResponse: (
+                response: ApiDataResponse<UserResponseData>
+            ) => {
+                return response.data.user;
+            },
         }),
     }),
 });
 
-export const { useGetMeQuery, useLogoutMutation } = sessionApi;
+export const { useGetMeQuery, useLogoutMutation, useUploadAvatarMutation } =
+    sessionApi;

@@ -11,7 +11,10 @@ class MessageController {
 
         const { id: conversationId } = req.params;
 
-        const messageData = SendMessageSchema.parse(req.body);
+        const messageData = SendMessageSchema.parse({
+            ...req.body,
+            id: conversationId,
+        });
 
         const message = await messageService.createMessage(
             user.id,

@@ -4,7 +4,7 @@ import { Spinner } from '@/shared/ui/spinner';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const isAuth = useAppSelector((state) => state.session.isAuth);
-    const { data, isLoading, isError, isSuccess } = useGetMeQuery(undefined, {
+    const { isLoading } = useGetMeQuery(undefined, {
         skip: isAuth,
     });
 

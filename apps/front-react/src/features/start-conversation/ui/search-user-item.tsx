@@ -1,24 +1,23 @@
-import { useStartMutation } from '@/features/conversation/api/conversation-api';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import type { User } from '@realtime-chat/schema';
 import { UserPlus } from 'lucide-react';
 
 interface SearchUserItemProps {
     user: User;
+    onSelect: (userId: string) => void;
+    disabled?: boolean;
 }
 
-export function SearchUserItem({ user }: SearchUserItemProps) {
-    const [start, { isLoading }] = useStartMutation();
-
+export function SearchUserItem({
+    user,
+    onSelect,
+    disabled,
+}: SearchUserItemProps) {
     return (
         <button
+            disabled={disabled}
             className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-colors group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            onClick={() => {
-                start({
-                    userIds: [user.id],
-                    isGroup: false,
-                });
-            }}
+            onClick={() => onSelect(user.id)}
         >
             <div className="flex items-center gap-3 min-w-0">
                 <Avatar className="h-10 w-10 border shrink-0">

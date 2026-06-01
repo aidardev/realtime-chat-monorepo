@@ -2,6 +2,7 @@ import {
     ConversationDetails,
     ConversationListItem,
 } from './conversation.schema';
+import { MessageFull } from './message.schema';
 import { User } from './user.schema';
 
 export interface FieldError {
@@ -54,4 +55,12 @@ export type ConversationResponseData = {
 
 export type ConversationsResponseData = {
     conversations: ConversationListItem[];
+};
+
+export type MessagesResponseData = {
+    messages: MessageFull[];
+};
+
+export type MessageResponseData = {
+    messages: MessageFull;
 };

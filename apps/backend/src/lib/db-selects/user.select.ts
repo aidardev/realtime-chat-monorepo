@@ -14,4 +14,5 @@ export const conversationUserSelect = {
     username: true,
     name: true,
     avatar: true,
+    bio: true,
 } as const;

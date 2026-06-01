@@ -16,6 +16,8 @@ export const PublicUserSchema = UserSchema.pick({
     username: true,
     name: true,
     avatar: true,
+    bio: true,
 });
 
 export type User = z.infer<typeof UserSchema>;
+export type PublicUser = z.infer<typeof PublicUserSchema>;

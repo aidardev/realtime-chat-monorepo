@@ -1,5 +1,5 @@
+import { useUploadAvatarMutation } from '@/entities/session';
 import { toast } from 'sonner';
-import { useUploadAvatarMutation } from '../api/upload-avatar-api';
 
 export const useAvatarUpload = () => {
     const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();

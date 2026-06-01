@@ -1,6 +1,7 @@
 import { LoginPage, RegisterPage } from '@/pages/auth';
-import { DashboardPage } from '@/pages/dashboard';
+import { DashboardLayout } from '@/pages/dashboard';
 import { useAppSelector } from '@/shared/lib/hooks';
+import { ChatEmpty, ChatWindow } from '@/widgets/chat-window';
 import { Navigate, Outlet, Route, Routes } from 'react-router';
 
 const PublicRoute = () => {
@@ -21,7 +22,13 @@ export function AppRouter() {
                 <Route path="/register" element={<RegisterPage />} />
             </Route>
             <Route element={<PrivateRoute />}>
-                <Route path="/" element={<DashboardPage />} />
+                <Route path="/" element={<DashboardLayout />}>
+                    <Route index element={<ChatEmpty />} />
+                    <Route
+                        path="conversations/:conversationId"
+                        element={<ChatWindow />}
+                    />
+                </Route>
             </Route>
         </Routes>
     );
