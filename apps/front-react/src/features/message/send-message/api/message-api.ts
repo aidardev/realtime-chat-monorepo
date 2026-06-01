@@ -1,16 +1,14 @@
 import { baseApi } from '@/shared/api/base-api';
 import type {
     ApiDataResponse,
+    MessagePreview,
     MessageResponseData,
     SendMessageInput,
 } from '@realtime-chat/schema';
 
 export const messageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        sendMessage: build.mutation<
-            ApiDataResponse<MessageResponseData>,
-            SendMessageInput
-        >({
+        sendMessage: build.mutation<MessagePreview, SendMessageInput>({
             query: (body) => ({
                 url: `/conversations/${body.id}/messages`,
                 body: {
@@ -18,6 +16,11 @@ export const messageApi = baseApi.injectEndpoints({
                 },
                 method: 'post',
             }),
+            transformResponse: (
+                response: ApiDataResponse<MessageResponseData>
+            ) => {
+                return response.data.message;
+            },
             invalidatesTags(_result, _error, arg) {
                 return [{ type: 'Messages', id: arg.id }];
             },
