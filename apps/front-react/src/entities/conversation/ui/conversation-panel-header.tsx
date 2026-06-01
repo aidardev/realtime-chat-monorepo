@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 
-import { StartConversationDialog } from '@/features/start-conversation';
+import { StartConversationDialog } from '@/features/conversation/start-conversation';
 import { SidebarHeader, SidebarInput } from '@/shared/ui/sidebar';
 
 export function ConversationPanelHeader() {

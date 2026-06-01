@@ -1,6 +1,6 @@
 import { showApiErrorToast } from '@/shared/lib/show-api-error-toast';
 import { useState, type FormEvent } from 'react';
-import { useSendMessageMutation } from '../api/message-api';
+import { useSendMessageMutation } from '../api/send-message-api';
 
 export const useMessageComposer = (conversationId: string) => {
     const [content, setContent] = useState('');

@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Label } from '@/shared/ui/label';
-import { Separator } from '@/shared/ui/separator';
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import type { ConversationDetails } from '@realtime-chat/schema';
 import { getConversationInfoSheetInfo } from '../model/get-conversation-info-sheet-info';
@@ -50,7 +49,7 @@ export function ConversationInfoSheetContent({
                         <p className="text-sm">{conversationInfo.bio}</p>
                     </div>
                 )}
-                <Separator />
+                {/* <Separator />
                 <div className="space-y-2">
                     <Label className="text-xs text-muted-foreground">
                         Медиа
@@ -63,7 +62,7 @@ export function ConversationInfoSheetContent({
                             />
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </SheetContent>
     );
