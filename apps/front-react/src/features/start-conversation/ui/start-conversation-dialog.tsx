@@ -36,7 +36,7 @@ export function StartConversationDialog() {
         try {
             const response = await handleStartConversation(userId);
 
-            const newConversationId = response.data.conversation.id;
+            const newConversationId = response.id;
 
             setIsOpen(false);
             setSearchTerm('');

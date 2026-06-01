@@ -1,6 +1,7 @@
 import { baseApi } from '@/shared/api/base-api';
 import type {
     ApiDataResponse,
+    ConversationDetails,
     ConversationRequest,
     ConversationResponseData,
 } from '@realtime-chat/schema';
@@ -8,7 +9,7 @@ import type {
 export const conversationApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         startConversation: build.mutation<
-            ApiDataResponse<ConversationResponseData>,
+            ConversationDetails,
             ConversationRequest
         >({
             query: (body) => ({
@@ -16,6 +17,11 @@ export const conversationApi = baseApi.injectEndpoints({
                 body: body,
                 method: 'post',
             }),
+            transformResponse: (
+                response: ApiDataResponse<ConversationResponseData>
+            ) => {
+                return response.data.conversation;
+            },
             invalidatesTags: ['Conversations'],
         }),
     }),
