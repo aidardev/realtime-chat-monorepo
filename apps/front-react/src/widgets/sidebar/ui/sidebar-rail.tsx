@@ -1,5 +1,6 @@
 import { Command, LucideSettings, MessageSquare } from 'lucide-react';
 
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Sheet, SheetTrigger } from '@/shared/ui/sheet';
@@ -96,7 +97,7 @@ export function SidebarRail() {
                                 <TooltipTrigger asChild>
                                     <Avatar className="size-8 rounded-lg cursor-pointer hover:opacity-80 transition-opacity">
                                         <AvatarImage
-                                            src={user.avatar}
+                                            src={getImageUrl(user.avatar)}
                                             alt={user.name || ''}
                                         />
                                         <AvatarFallback className="rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">

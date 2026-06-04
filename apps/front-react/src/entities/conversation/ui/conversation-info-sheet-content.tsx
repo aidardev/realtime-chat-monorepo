@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Label } from '@/shared/ui/label';
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
@@ -25,7 +26,9 @@ export function ConversationInfoSheetContent({
             </SheetHeader>
             <div className="flex flex-col items-center gap-4 py-6 px-4">
                 <Avatar className="h-24 w-24">
-                    <AvatarImage src={conversationInfo.avatar ?? undefined} />
+                    <AvatarImage
+                        src={getImageUrl(conversationInfo.avatar) ?? undefined}
+                    />
                     <AvatarFallback className="text-2xl">
                         {conversationInfo.avatarFallback}
                     </AvatarFallback>

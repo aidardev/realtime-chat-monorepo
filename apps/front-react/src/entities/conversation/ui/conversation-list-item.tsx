@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import type { ConversationListItem as ConversationListItemSchema } from '@realtime-chat/schema';
 import { NavLink } from 'react-router';
@@ -14,6 +15,8 @@ export function ConversationListItem({
 }: ConversationListItemProps) {
     const preview = getConversationPreviewInfo(conversation, currentUserId);
 
+    console.log(preview.avatar);
+
     return (
         <NavLink
             to={`/conversations/${conversation.id}`}
@@ -22,7 +25,7 @@ export function ConversationListItem({
             }
         >
             <Avatar className="h-10 w-10 border">
-                <AvatarImage src={preview.avatar ?? undefined} />
+                <AvatarImage src={getImageUrl(preview.avatar) ?? undefined} />
                 <AvatarFallback className="font-semibold">
                     {preview.avatarFallback}
                 </AvatarFallback>

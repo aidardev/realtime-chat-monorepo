@@ -1,4 +1,5 @@
 import { useLogout } from '@/features/auth/logout';
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import type { User } from '@realtime-chat/schema';
@@ -54,7 +55,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
             <div className="flex flex-col h-full bg-muted/10">
                 <div className="flex items-center gap-4 p-4 bg-background shadow-sm mb-2 cursor-pointer hover:bg-muted/50 transition-colors">
                     <Avatar className="h-16 w-16">
-                        <AvatarImage src={user.avatar} />
+                        <AvatarImage src={getImageUrl(user.avatar)} />
                         <AvatarFallback>{user.username?.[0]}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">

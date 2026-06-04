@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 import {
@@ -27,7 +28,9 @@ export function ConversationHeader({
         <header className="flex h-16 shrink-0 items-center justify-between border-b px-4 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
             <div className="flex items-center gap-3">
                 <Avatar>
-                    <AvatarImage src={headerInfo.avatar ?? undefined} />
+                    <AvatarImage
+                        src={getImageUrl(headerInfo.avatar) ?? undefined}
+                    />
                     <AvatarFallback>{headerInfo.avatarFallback}</AvatarFallback>
                 </Avatar>
                 <div>

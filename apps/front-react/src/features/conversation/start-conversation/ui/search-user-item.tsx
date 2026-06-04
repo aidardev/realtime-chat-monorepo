@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import type { User } from '@realtime-chat/schema';
 import { UserPlus } from 'lucide-react';
@@ -21,7 +22,10 @@ export function SearchUserItem({
         >
             <div className="flex items-center gap-3 min-w-0">
                 <Avatar className="h-10 w-10 border shrink-0">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage
+                        src={getImageUrl(user.avatar)}
+                        alt={user.name}
+                    />
                     <AvatarFallback>{user.name?.[0]}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col items-start text-sm truncate">
