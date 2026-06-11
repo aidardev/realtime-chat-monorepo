@@ -78,7 +78,10 @@ export function ChatWindow() {
                 <MessagesEmptyState />
             )}
 
-            <MessageComposer conversationId={conversationId} />
+            <MessageComposer
+                conversationId={conversationId}
+                key={conversationId}
+            />
         </div>
     );
 }
