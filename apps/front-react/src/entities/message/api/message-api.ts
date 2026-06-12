@@ -37,26 +37,11 @@ export const messageApi = baseApi.injectEndpoints({
                 try {
                     await cacheDataLoaded;
 
-                    const joinRoom = () => {
-                        socketService.socket?.emit('conversation:join', {
-                            conversationId,
-                        });
-                    };
-
-                    if (socketService.socket?.connected) {
-                        joinRoom();
-                    } else {
-                        socketService.socket?.once('connect', joinRoom);
-                    }
-
                     socketService.socket?.on('message:new', handleNewMessage);
                 } catch (error) {}
 
                 await cacheEntryRemoved;
 
-                socketService.socket?.emit('conversation:leave', {
-                    conversationId,
-                });
                 socketService.socket?.off('message:new', handleNewMessage);
             },
         }),

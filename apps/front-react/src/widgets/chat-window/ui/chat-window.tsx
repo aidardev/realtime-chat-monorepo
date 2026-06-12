@@ -7,7 +7,9 @@ import { MessagesEmptyState } from '@/entities/message/ui/messages-empty';
 import { MessageComposer } from '@/features/message/send-message';
 import { isFetchBaseQueryError } from '@/shared/lib/handle-api-error';
 import { useAppSelector } from '@/shared/lib/hooks';
+import { socketService } from '@/shared/lib/socket/socket-service';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { ChatWindowError } from './chat-window-error';
 import { ChatWindowNotFound } from './chat-window-not-found';
@@ -16,6 +18,18 @@ import { ChatWindowSkeleton } from './chat-window-skeleton';
 export function ChatWindow() {
     const { conversationId } = useParams();
     const me = useAppSelector((state) => state.session.user);
+
+    useEffect(() => {
+        if (!conversationId || !socketService.socket) return;
+
+        socketService.socket.emit('conversation:join', { conversationId });
+
+        return () => {
+            socketService.socket?.emit('conversation:leave', {
+                conversationId,
+            });
+        };
+    }, [conversationId]);
 
     const conversationQuery = useGetConversationQuery(
         conversationId ?? skipToken
