@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import { MessagePreviewSchema } from './message.schema';
-import { PublicUserSchema } from './user.schema';
+import { PublicUserSchema, UserIdSchema } from './user.schema';
 
 export const ConversationParticipantSchema = z.object({
     conversationId: z.string(),
@@ -26,11 +26,22 @@ export const ConversationDetailsSchema = ConversationBaseSchema.extend({
     participants: z.array(ConversationParticipantSchema),
 });
 
-export const ConversationRequestSchema = z.object({
-    name: z.string().optional(),
-    isGroup: z.boolean(),
-    userIds: z.array(z.string()),
+export const DirectConversationRequestSchema = z.object({
+    isGroup: z.literal(false),
+    userIds: z.array(UserIdSchema).length(1),
+    name: z.never().optional(),
 });
+
+export const GroupConversationRequestSchema = z.object({
+    isGroup: z.literal(true),
+    userIds: z.array(UserIdSchema).min(2),
+    name: z.string().trim().min(1).max(80),
+});
+
+export const ConversationRequestSchema = z.discriminatedUnion('isGroup', [
+    DirectConversationRequestSchema,
+    GroupConversationRequestSchema,
+]);
 
 export type ConversationListItem = z.infer<typeof ConversationListItemSchema>;
 export type ConversationDetails = z.infer<typeof ConversationDetailsSchema>;
