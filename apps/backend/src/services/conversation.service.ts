@@ -71,23 +71,61 @@ export class ConversationService {
     async startConversation(currentUserId: string, data: ConversationRequest) {
         const { isGroup, userIds, name } = data;
 
-        const allParticipantIds = Array.from(
-            new Set([...userIds, currentUserId])
-        );
+        const uniqueUserIds = Array.from(new Set(userIds));
 
-        if (!isGroup && allParticipantIds.length === 2) {
+        if (!isGroup && uniqueUserIds.length !== 1) {
+            throw new AppError(
+                'Direct conversation requires exactly 1 user',
+                StatusCodes.BAD_REQUEST
+            );
+        }
+
+        if (isGroup && uniqueUserIds.length < 2) {
+            throw new AppError(
+                'Group conversation requires at least 2 users',
+                StatusCodes.BAD_REQUEST
+            );
+        }
+
+        if (uniqueUserIds.includes(currentUserId)) {
+            throw new AppError(
+                'You cannot add yourself to participants',
+                StatusCodes.BAD_REQUEST
+            );
+        }
+
+        const participants = [...uniqueUserIds, currentUserId];
+
+        const existingUsers = await prisma.user.findMany({
+            where: {
+                id: {
+                    in: participants,
+                },
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (existingUsers.length !== participants.length) {
+            throw new AppError('User not found', StatusCodes.NOT_FOUND);
+        }
+
+        if (!isGroup) {
+            const otherUserId = uniqueUserIds[0];
+
             const existingConversation = await prisma.conversation.findFirst({
                 where: {
                     isGroup: false,
                     AND: [
                         {
                             participants: {
-                                some: { userId: allParticipantIds[0] },
+                                some: { userId: currentUserId },
                             },
                         },
                         {
                             participants: {
-                                some: { userId: allParticipantIds[1] },
+                                some: { userId: otherUserId },
                             },
                         },
                     ],
@@ -108,9 +146,10 @@ export class ConversationService {
 
         return await prisma.conversation.create({
             data: {
+                isGroup,
                 name: isGroup ? name : null,
                 participants: {
-                    create: allParticipantIds.map((id) => ({
+                    create: participants.map((id) => ({
                         userId: id,
                     })),
                 },
