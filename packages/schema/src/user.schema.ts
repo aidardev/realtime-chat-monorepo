@@ -1,7 +1,9 @@
 import * as z from 'zod';
 
+export const UserIdSchema = z.string().min(1);
+
 export const UserSchema = z.object({
-    id: z.string(),
+    id: UserIdSchema,
     email: z.email(),
     username: z.string().min(3),
     role: z.enum(['USER', 'ADMIN']),
