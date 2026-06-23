@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react';
 
-import { StartConversationDialog } from '@/features/conversation/start-conversation';
 import { SidebarHeader, SidebarInput } from '@/shared/ui/sidebar';
+import { NewConversationDropdown } from './new-conversation-dropdown';
 
 export function ConversationPanelHeader() {
     return (
@@ -11,7 +11,7 @@ export function ConversationPanelHeader() {
                     Сообщения
                 </div>
                 <div className="flex items-center gap-2">
-                    <StartConversationDialog />
+                    <NewConversationDropdown />
                 </div>
             </div>
             <div className="relative">

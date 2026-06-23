@@ -3,6 +3,7 @@ import type {
     ApiDataResponse,
     ConversationDetails,
     ConversationListItem,
+    ConversationRequest,
     ConversationResponseData,
     ConversationsResponseData,
 } from '@realtime-chat/schema';
@@ -29,8 +30,27 @@ export const conversationApi = baseApi.injectEndpoints({
                 return response.data.conversation;
             },
         }),
+        startConversation: build.mutation<
+            ConversationDetails,
+            ConversationRequest
+        >({
+            query: (body) => ({
+                url: '/conversations',
+                body: body,
+                method: 'post',
+            }),
+            transformResponse: (
+                response: ApiDataResponse<ConversationResponseData>
+            ) => {
+                return response.data.conversation;
+            },
+            invalidatesTags: ['Conversations'],
+        }),
     }),
 });
 
-export const { useGetConversationsQuery, useGetConversationQuery } =
-    conversationApi;
+export const {
+    useGetConversationsQuery,
+    useGetConversationQuery,
+    useStartConversationMutation,
+} = conversationApi;

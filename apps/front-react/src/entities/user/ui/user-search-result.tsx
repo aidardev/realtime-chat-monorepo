@@ -3,17 +3,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import type { User } from '@realtime-chat/schema';
 import { UserPlus } from 'lucide-react';
 
-interface SearchUserItemProps {
+interface UserSearchResultProps {
     user: User;
     onSelect: (userId: string) => void;
     disabled?: boolean;
 }
 
-export function SearchUserItem({
+export function UserSearchResult({
     user,
     onSelect,
     disabled,
-}: SearchUserItemProps) {
+}: UserSearchResultProps) {
     return (
         <button
             disabled={disabled}
@@ -26,7 +26,7 @@ export function SearchUserItem({
                         src={getImageUrl(user.avatar)}
                         alt={user.name}
                     />
-                    <AvatarFallback>{user.name?.[0]}</AvatarFallback>
+                    <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col items-start text-sm truncate">
                     <span className="font-medium truncate w-full text-left">

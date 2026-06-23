@@ -56,7 +56,9 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
                 <div className="flex items-center gap-4 p-4 bg-background shadow-sm mb-2 cursor-pointer hover:bg-muted/50 transition-colors">
                     <Avatar className="h-16 w-16">
                         <AvatarImage src={getImageUrl(user.avatar)} />
-                        <AvatarFallback>{user.username?.[0]}</AvatarFallback>
+                        <AvatarFallback>
+                            {user.username?.charAt(0)}
+                        </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
                         <span className="font-medium text-lg">

@@ -8,14 +8,17 @@ import { MessageComposer } from '@/features/message/send-message';
 import { isFetchBaseQueryError } from '@/shared/lib/handle-api-error';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { socketService } from '@/shared/lib/socket/socket-service';
+import { ConversationInfoSheet } from '@/widgets/sidebar';
 import { skipToken } from '@reduxjs/toolkit/query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { ChatWindowError } from './chat-window-error';
 import { ChatWindowNotFound } from './chat-window-not-found';
 import { ChatWindowSkeleton } from './chat-window-skeleton';
 
 export function ChatWindow() {
+    const [infoOpen, setInfoOpen] = useState(false);
+
     const { conversationId } = useParams();
     const me = useAppSelector((state) => state.session.user);
 
@@ -80,6 +83,14 @@ export function ChatWindow() {
             <ConversationHeader
                 conversation={conversation}
                 currentUserId={me.id}
+                onInfoClick={() => setInfoOpen(true)}
+            />
+
+            <ConversationInfoSheet
+                conversation={conversation}
+                currentUserId={me.id}
+                open={infoOpen}
+                onOpenChange={setInfoOpen}
             />
 
             {messages.length > 0 ? (

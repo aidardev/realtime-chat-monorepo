@@ -26,7 +26,7 @@ export function AvatarUploader({ user }: AvatarUploaderProps) {
                     className="object-cover"
                 />
                 <AvatarFallback className="text-4xl bg-muted text-muted-foreground">
-                    {user.username?.[0]?.toUpperCase()}
+                    {user.username?.charAt(0)?.toUpperCase()}
                 </AvatarFallback>
             </Avatar>
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-full bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 text-white font-medium">

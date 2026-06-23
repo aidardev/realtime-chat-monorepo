@@ -1,6 +1,5 @@
 import {
     ConversationList,
-    ConversationPanelHeader,
     useGetConversationsQuery,
 } from '@/entities/conversation';
 import { useAppSelector } from '@/shared/lib/hooks';
@@ -8,6 +7,7 @@ import { Button } from '@/shared/ui/button';
 import { Sidebar } from '@/shared/ui/sidebar';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { AlertCircle, MessageSquareDashed, RefreshCw } from 'lucide-react';
+import { ConversationPanelHeader } from './conversations-panel-header';
 
 export function ConversationsPanel() {
     const user = useAppSelector((state) => state.session.user);

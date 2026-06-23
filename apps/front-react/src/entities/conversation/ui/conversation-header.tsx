@@ -7,20 +7,20 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu';
-import { Sheet, SheetTrigger } from '@/shared/ui/sheet';
 import type { ConversationDetails } from '@realtime-chat/schema';
 import { Info, MoreVertical, Phone, Video } from 'lucide-react';
 import { getConversationHeaderInfo } from '../model/get-conversation-header-info';
-import { ConversationInfoSheetContent } from './conversation-info-sheet-content';
 
 interface CovnersationHeaderProps {
     conversation: ConversationDetails;
     currentUserId: string;
+    onInfoClick?: () => void;
 }
 
 export function ConversationHeader({
     conversation,
     currentUserId,
+    onInfoClick,
 }: CovnersationHeaderProps) {
     const headerInfo = getConversationHeaderInfo(conversation, currentUserId);
 
@@ -59,21 +59,14 @@ export function ConversationHeader({
                     <Video className="size-5" />
                 </Button>
 
-                <Sheet>
-                    <SheetTrigger asChild>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="text-muted-foreground"
-                        >
-                            <Info className="size-5" />
-                        </Button>
-                    </SheetTrigger>
-                    <ConversationInfoSheetContent
-                        conversation={conversation}
-                        currentUserId={currentUserId}
-                    />
-                </Sheet>
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-muted-foreground"
+                    onClick={onInfoClick}
+                >
+                    <Info className="size-5" />
+                </Button>
 
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>

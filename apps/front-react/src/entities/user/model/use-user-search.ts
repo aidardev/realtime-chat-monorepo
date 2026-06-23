@@ -1,8 +1,8 @@
+import { useSearchQuery } from '@/entities/user';
 import { useDebounce } from '@/shared/lib/use-debounce';
 import { useState } from 'react';
-import { useSearchQuery } from '../api/search-api';
 
-export const useSearch = () => {
+export const useUserSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm);
 
@@ -13,11 +13,16 @@ export const useSearch = () => {
         }
     );
 
+    const users = data ?? [];
+    const hasSearched = debouncedSearchTerm.length >= 2;
+    const isNotFound = hasSearched && !isFetching && users.length === 0;
+
     return {
-        data,
+        users,
         isLoading,
         isFetching,
         searchTerm,
         setSearchTerm,
+        isNotFound,
     };
 };

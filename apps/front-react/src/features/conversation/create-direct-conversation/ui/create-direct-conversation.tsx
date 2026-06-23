@@ -1,58 +1,36 @@
+import { UserSearchResult, useUserSearch } from '@/entities/user';
 import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/shared/ui/dialog';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 import { ScrollArea } from '@/shared/ui/scroll-area';
-import { Plus, Search } from 'lucide-react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useSearch } from '../model/use-search';
-import { useStartConversation } from '../model/use-start-conversation';
-import { SearchUserItem } from './search-user-item';
+import { Search } from 'lucide-react';
+import { useCreateDirectConversation } from '../model/use-create-direct-conversation';
 import { SearchUsersSkeletons } from './search-users-skeletons';
 
-export function StartConversationDialog() {
-    const navigate = useNavigate();
-    const [open, setIsOpen] = useState(false);
+interface CreateDirectConversationDialogProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+}
 
-    const {
-        data,
-        isLoading: isSearchLoading,
-        searchTerm,
-        setSearchTerm,
-    } = useSearch();
-    const { handleStartConversation, isConversationCreating } =
-        useStartConversation();
-
-    const users = data || [];
-
-    const handleSelectUser = async (userId: string) => {
-        try {
-            const response = await handleStartConversation(userId);
-
-            const newConversationId = response.id;
-
-            setIsOpen(false);
-            setSearchTerm('');
-
-            navigate(`/conversations/${newConversationId}`);
-        } catch (error) {}
-    };
-
-    const isNotFound = searchTerm && !isSearchLoading && users.length === 0;
-    const hasResults = users.length > 0;
+export function CreateDirectConversationDialog({
+    open,
+    onOpenChange,
+}: CreateDirectConversationDialogProps) {
+    const { users, isFetching, searchTerm, setSearchTerm, isNotFound } =
+        useUserSearch();
+    const { handleSelectUser, isCreating } = useCreateDirectConversation(() => {
+        setSearchTerm('');
+        onOpenChange(false);
+    });
 
     return (
-        <Dialog open={open} onOpenChange={setIsOpen}>
-            <DialogTrigger className="text-muted-foreground hover:text-primary">
-                <Plus className="size-5" />
-            </DialogTrigger>
+        <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-[425px] p-0 gap-0">
                 <DialogHeader className="p-6 pb-2">
                     <DialogTitle>Новый чат</DialogTitle>
@@ -77,7 +55,7 @@ export function StartConversationDialog() {
                                 id="search"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                disabled={isConversationCreating}
+                                disabled={isCreating}
                             />
                         </Field>
                     </form>
@@ -87,16 +65,15 @@ export function StartConversationDialog() {
 
                 <ScrollArea className="h-[300px]">
                     <div className="p-2">
-                        {isSearchLoading && <SearchUsersSkeletons />}
+                        {isFetching && <SearchUsersSkeletons />}
 
-                        {!isSearchLoading &&
-                            hasResults &&
+                        {!isFetching &&
                             users.map((user) => (
-                                <SearchUserItem
+                                <UserSearchResult
                                     key={user.id}
                                     user={user}
                                     onSelect={handleSelectUser}
-                                    disabled={isConversationCreating}
+                                    disabled={isCreating}
                                 />
                             ))}
 

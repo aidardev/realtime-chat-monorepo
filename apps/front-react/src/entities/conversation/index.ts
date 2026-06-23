@@ -3,7 +3,5 @@ export * from './model/get-conversation-counterpart';
 export * from './model/get-conversation-header-info';
 export * from './model/get-conversation-preview-info';
 export * from './ui/conversation-header';
-export * from './ui/conversation-info-sheet-content';
 export * from './ui/conversation-list';
 export * from './ui/conversation-list-item';
-export * from './ui/conversation-panel-header';
