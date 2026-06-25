@@ -2,7 +2,7 @@ import { ScrollArea } from '@/shared/ui/scroll-area';
 import type { MessageFull } from '@realtime-chat/schema';
 import { useEffect, useMemo, useRef } from 'react';
 import { useGetTypingUsersQuery } from '../api/message-api';
-import { buildMessageListItems } from '../model/builder-message-list-items';
+import { buildMessageListItems } from '../model/build-message-list-items';
 import { MessageBubble } from './message-bubble';
 import { MessageDaySeparator } from './message-day-separator';
 
