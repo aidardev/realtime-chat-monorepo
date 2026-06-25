@@ -1,15 +1,16 @@
 import { useStartConversationMutation } from '@/entities/conversation';
 import { showApiErrorToast } from '@/shared/lib/show-api-error-toast';
+import type { PublicUser } from '@realtime-chat/schema';
 import { useNavigate } from 'react-router';
 
 export const useCreateDirectConversation = (onSuccess?: () => void) => {
     const navigate = useNavigate();
     const [startConversation, { isLoading }] = useStartConversationMutation();
 
-    const handleSelectUser = async (userId: string) => {
+    const handleSelectUser = async (user: PublicUser) => {
         try {
             const conversation = await startConversation({
-                userIds: [userId],
+                userIds: [user.id],
                 isGroup: false,
             }).unwrap();
 

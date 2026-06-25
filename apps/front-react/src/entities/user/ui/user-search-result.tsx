@@ -1,24 +1,31 @@
 import { getImageUrl } from '@/shared/lib/get-image-url';
+import { cn } from '@/shared/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
-import type { User } from '@realtime-chat/schema';
-import { UserPlus } from 'lucide-react';
+import type { PublicUser } from '@realtime-chat/schema';
 
 interface UserSearchResultProps {
-    user: User;
-    onSelect: (userId: string) => void;
+    user: PublicUser;
+    onSelect: (user: PublicUser) => void;
     disabled?: boolean;
+    selected?: boolean;
+    rightSlot?: React.ReactNode;
 }
 
 export function UserSearchResult({
     user,
     onSelect,
     disabled,
+    selected,
+    rightSlot,
 }: UserSearchResultProps) {
     return (
-        <button
-            disabled={disabled}
-            className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-colors group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            onClick={() => onSelect(user.id)}
+        <div
+            className={cn(
+                'w-full flex items-center justify-between p-3 rounded-lg hover:bg-muted/80 transition-colors group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                selected && 'bg-accent',
+                disabled && 'pointer-events-none'
+            )}
+            onClick={() => onSelect(user)}
         >
             <div className="flex items-center gap-3 min-w-0">
                 <Avatar className="h-10 w-10 border shrink-0">
@@ -38,7 +45,7 @@ export function UserSearchResult({
                 </div>
             </div>
 
-            <UserPlus className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity shrink-0 ml-2" />
-        </button>
+            {rightSlot}
+        </div>
     );
 }

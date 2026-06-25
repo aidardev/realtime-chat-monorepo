@@ -1,4 +1,5 @@
 import { CreateDirectConversationDialog } from '@/features/conversation/create-direct-conversation';
+import { CreateGroupConversationDialog } from '@/features/conversation/create-group-conversation';
 import { Button } from '@/shared/ui/button';
 import {
     DropdownMenu,
@@ -41,6 +42,11 @@ export function NewConversationDropdown() {
             <CreateDirectConversationDialog
                 open={activeDialog === 'direct'}
                 onOpenChange={(open) => setActiveDialog(open ? 'direct' : null)}
+            />
+
+            <CreateGroupConversationDialog
+                open={activeDialog === 'group'}
+                onOpenChange={(open) => setActiveDialog(open ? 'group' : null)}
             />
         </>
     );

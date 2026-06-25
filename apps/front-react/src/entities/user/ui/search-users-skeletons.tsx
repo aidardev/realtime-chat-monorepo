@@ -6,9 +6,8 @@ export function SearchUsersSkeletons() {
             <Skeleton className="h-10 w-10 rounded-full" />
 
             <div className="space-y-2">
-                <Skeleton className="h-4 w-[120px]" />
-
-                <Skeleton className="h-3 w-[80px]" />
+                <Skeleton className="h-4 w-30" />
+                <Skeleton className="h-3 w-20" />
             </div>
         </div>
     ));

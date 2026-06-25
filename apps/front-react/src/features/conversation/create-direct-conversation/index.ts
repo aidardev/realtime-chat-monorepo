@@ -1,1 +1,1 @@
-export { CreateDirectConversationDialog } from './ui/create-direct-conversation';
+export { CreateDirectConversationDialog } from './ui/create-direct-conversation-dialog';

@@ -13,7 +13,7 @@ export const useUserSearch = () => {
         }
     );
 
-    const users = data ?? [];
+    const users = debouncedSearchTerm.length < 2 ? [] : (data ?? []);
     const hasSearched = debouncedSearchTerm.length >= 2;
     const isNotFound = hasSearched && !isFetching && users.length === 0;
 
