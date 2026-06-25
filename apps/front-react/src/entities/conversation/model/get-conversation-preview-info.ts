@@ -10,7 +10,7 @@ export interface ConversationPreviewInfo extends Pick<
     'isGroup' | 'title' | 'avatar' | 'avatarFallback'
 > {
     lastMessagePreview: string;
-    updatedAtLabel: string;
+    lastActivityLabel: string;
 }
 
 export function getConversationPreviewInfo(
@@ -25,6 +25,8 @@ export function getConversationPreviewInfo(
         avatar: context.avatar,
         avatarFallback: context.avatarFallback,
         lastMessagePreview: conversation.lastMessage?.content ?? '',
-        updatedAtLabel: formatChatListTime(conversation.updatedAt),
+        lastActivityLabel: formatChatListTime(
+            conversation.lastMessage?.createdAt ?? conversation.updatedAt
+        ),
     };
 }

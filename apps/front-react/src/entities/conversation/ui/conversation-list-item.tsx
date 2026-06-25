@@ -32,7 +32,7 @@ export function ConversationListItem({
                 <div className="flex justify-between font-medium">
                     <span className="truncate">{preview.title}</span>
                     <span className="text-xs text-muted-foreground ml-2 whitespace-nowrap">
-                        {preview.updatedAtLabel}
+                        {preview.lastActivityLabel}
                     </span>
                 </div>
                 <div className="flex justify-between items-center mt-1">
