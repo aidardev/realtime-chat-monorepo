@@ -51,7 +51,7 @@ export function CreateDirectConversationDialog({
                 <DialogHeader>
                     <DialogTitle>New Chat</DialogTitle>
                     <DialogDescription>
-                        Enter a name or @username to start a conversation.
+                        Enter a username to start a conversation.
                     </DialogDescription>
                 </DialogHeader>
 
