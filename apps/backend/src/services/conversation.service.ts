@@ -144,7 +144,7 @@ export class ConversationService {
             if (existingConversation) return existingConversation;
         }
 
-        return await prisma.conversation.create({
+        return prisma.conversation.create({
             data: {
                 isGroup,
                 name: isGroup ? name : null,

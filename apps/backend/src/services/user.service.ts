@@ -82,7 +82,7 @@ class UserService {
             return [];
         }
 
-        return await prisma.user.findMany({
+        return prisma.user.findMany({
             where: {
                 id: { not: currentUserId },
                 username: {
@@ -95,7 +95,7 @@ class UserService {
     }
 
     async updateProfile(userId: string, data: Pick<User, 'name' | 'bio'>) {
-        return await prisma.user.update({
+        return prisma.user.update({
             where: {
                 id: userId,
             },
