@@ -76,7 +76,13 @@ class MessageService {
         return message;
     }
 
-    async getMessagesByConversation(userId: string, conversationId: string) {
+    async getMessagesByConversation(
+        userId: string,
+        conversationId: string,
+        options: { cursor?: string; limit: number }
+    ) {
+        const { cursor, limit = 20 } = options;
+
         const accessibleConversation = await prisma.conversation.findFirst({
             where: {
                 id: conversationId,
@@ -95,19 +101,32 @@ class MessageService {
             throw new AppError('Forbidden', StatusCodes.FORBIDDEN);
         }
 
-        return prisma.message.findMany({
+        const messagesPlusOne = await prisma.message.findMany({
             where: {
                 conversationId: conversationId,
             },
             orderBy: {
-                createdAt: 'asc',
+                createdAt: 'desc',
             },
             include: {
                 sender: {
                     select: conversationUserSelect,
                 },
             },
+            take: limit + 1,
+            ...(cursor && { cursor: { id: cursor }, skip: 1 }),
         });
+
+        const hasMore = messagesPlusOne.length > limit;
+
+        const messages = hasMore
+            ? messagesPlusOne.slice(0, limit)
+            : messagesPlusOne;
+
+        return {
+            messages,
+            hasMore,
+        };
     }
 }
 

@@ -35,15 +35,22 @@ class MessageController {
 
         const { id: conversationId } = req.params;
 
-        const messages = await messageService.getMessagesByConversation(
-            user.id,
-            conversationId
-        );
+        const cursor =
+            typeof req.query.cursor === 'string' ? req.query.cursor : undefined;
+        const limit = req.query.limit ? Number(req.query.limit) : 20;
+
+        const { messages, hasMore } =
+            await messageService.getMessagesByConversation(
+                user.id,
+                conversationId,
+                { cursor, limit }
+            );
 
         res.status(StatusCodes.OK).json({
             status: 'success',
             data: {
                 messages,
+                hasMore,
             },
         });
     };

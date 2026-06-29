@@ -59,6 +59,7 @@ export type ConversationsResponseData = {
 
 export type MessagesResponseData = {
     messages: MessageFull[];
+    hasMore: boolean;
 };
 
 export type MessageResponseData = {

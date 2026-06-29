@@ -8,13 +8,16 @@ import type {
 
 export const messageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getMessages: build.query<MessageFull[], string>({
+        getMessages: build.query<MessagesResponseData, string>({
             query: (conversationId) =>
                 `/conversations/${conversationId}/messages`,
             transformResponse: (
                 response: ApiDataResponse<MessagesResponseData>
             ) => {
-                return response.data.messages;
+                return {
+                    messages: [...response.data.messages].reverse(),
+                    hasMore: response.data.hasMore,
+                };
             },
             async onCacheEntryAdded(
                 conversationId,
@@ -22,14 +25,14 @@ export const messageApi = baseApi.injectEndpoints({
             ) {
                 const handleNewMessage = (newMessage: MessageFull) => {
                     updateCachedData((draft) => {
-                        const exists = draft.some(
+                        const exists = draft.messages.some(
                             (m) => m.id === newMessage.id
                         );
                         if (
                             !exists &&
                             conversationId === newMessage.conversationId
                         ) {
-                            draft.push(newMessage);
+                            draft.messages.push(newMessage);
                         }
                     });
                 };
@@ -43,6 +46,45 @@ export const messageApi = baseApi.injectEndpoints({
                 await cacheEntryRemoved;
 
                 socketService.socket?.off('message:new', handleNewMessage);
+            },
+        }),
+        loadMoreMessages: build.mutation<
+            MessagesResponseData,
+            { conversationId: string; cursor: string }
+        >({
+            query: ({ conversationId, cursor }) => ({
+                url: `/conversations/${conversationId}/messages`,
+                params: {
+                    cursor,
+                },
+            }),
+            transformResponse: (
+                response: ApiDataResponse<MessagesResponseData>
+            ) => {
+                return {
+                    messages: [...response.data.messages].reverse(),
+                    hasMore: response.data.hasMore,
+                };
+            },
+            async onQueryStarted(
+                { conversationId },
+                { dispatch, queryFulfilled }
+            ) {
+                try {
+                    const { data: olderMessages } = await queryFulfilled;
+                    dispatch(
+                        messageApi.util.updateQueryData(
+                            'getMessages',
+                            conversationId,
+                            (draft) => {
+                                draft.messages.unshift(
+                                    ...olderMessages.messages
+                                );
+                                draft.hasMore = olderMessages.hasMore;
+                            }
+                        )
+                    );
+                } catch {}
             },
         }),
         getTypingUsers: build.query<string[], string>({
@@ -91,4 +133,8 @@ export const messageApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetMessagesQuery, useGetTypingUsersQuery } = messageApi;
+export const {
+    useGetMessagesQuery,
+    useGetTypingUsersQuery,
+    useLoadMoreMessagesMutation,
+} = messageApi;

@@ -76,7 +76,7 @@ export function ChatWindow() {
     }
 
     const conversation = conversationQuery.data;
-    const messages = messagesQuery.data ?? [];
+    const { messages = [], hasMore = true } = messagesQuery.data ?? {};
 
     return (
         <div className="flex h-full flex-col bg-background">
@@ -98,6 +98,7 @@ export function ChatWindow() {
                     messages={messages}
                     meId={me.id}
                     conversationId={conversationId}
+                    hasMore={hasMore}
                 />
             ) : (
                 <MessagesEmptyState />
