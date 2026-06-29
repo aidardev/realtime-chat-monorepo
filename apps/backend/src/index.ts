@@ -7,6 +7,7 @@ import { createServer } from 'http';
 import path from 'path';
 import { CORS_OPTIONS } from './config/cors.config';
 import { errorMiddleware } from './middlewares/error.middleware';
+import adminRoutes from './routes/admin.routes';
 import authRoutes from './routes/auth.routes';
 import conversationRoutes from './routes/conversation.routes';
 import meRoutes from './routes/me.routes';
@@ -26,6 +27,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/conversations', conversationRoutes);
 app.use('/api/me', meRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/', async (req, res) => {
     const users = await prisma.user.findMany();
