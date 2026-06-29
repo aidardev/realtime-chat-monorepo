@@ -13,6 +13,7 @@ export const useMessageComposer = (conversationId: string) => {
     const [content, setContent] = useState('');
     const [sendMessage, { isLoading }] = useSendMessageMutation();
 
+    const inputRef = useRef<HTMLInputElement>(null);
     const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isTypingRef = useRef(false);
 
@@ -69,11 +70,18 @@ export const useMessageComposer = (conversationId: string) => {
         };
     }, [conversationId]);
 
+    useEffect(() => {
+        if (!isLoading && content === '') {
+            inputRef.current?.focus();
+        }
+    }, [isLoading]);
+
     return {
         handleSubmit,
         content,
         handleTyping,
         isLoading,
         canSend,
+        inputRef,
     };
 };

@@ -8,8 +8,14 @@ interface MessageComposerProps {
 }
 
 export function MessageComposer({ conversationId }: MessageComposerProps) {
-    const { content, handleTyping, handleSubmit, isLoading, canSend } =
-        useMessageComposer(conversationId);
+    const {
+        content,
+        handleTyping,
+        handleSubmit,
+        isLoading,
+        canSend,
+        inputRef,
+    } = useMessageComposer(conversationId);
 
     return (
         <div className="p-4 border-t bg-background">
@@ -32,6 +38,7 @@ export function MessageComposer({ conversationId }: MessageComposerProps) {
                     value={content}
                     onChange={handleTyping}
                     disabled={isLoading}
+                    ref={inputRef}
                 />
                 <Button
                     type="button"
