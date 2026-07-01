@@ -16,23 +16,21 @@ interface MessageListProps {
     hasMore: boolean;
 }
 
+const SCROLL_BOTTOM_THRESHOLD = 100;
+
 export function MessageList({
     messages = [],
     meId,
     conversationId,
     hasMore,
 }: MessageListProps) {
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const chatInnerRef = useRef<HTMLDivElement>(null);
+    const viewportRef = useRef<HTMLDivElement>(null);
     const sentinelRef = useRef<HTMLDivElement>(null);
 
-    const prevLastMessageId = useRef<string | undefined>(
-        messages[messages.length - 1]?.id
-    );
-    const firstMessageIdRef = useRef<string | undefined>(messages[0]?.id);
-    const scrollHeightRef = useRef<number>(0);
-
-    const SCROLL_BOTTOM_THRESHOLD = 100;
+    const prevConversationIdRef = useRef<string | undefined>(undefined);
+    const prevScrollHeightRef = useRef<number>(0);
+    const prevLastMessageIdRef = useRef<string | undefined>(undefined);
+    const wasLoadingMoreRef = useRef(false);
 
     const { data: typingUsers = [] } = useGetTypingUsersQuery(conversationId);
     const [loadMoreMessages, { isLoading: isLoadingMore }] =
@@ -40,81 +38,69 @@ export function MessageList({
 
     const items = useMemo(() => buildMessageListItems(messages), [messages]);
 
-    /**
-     * Radix UI ScrollArea wraps the native viewport.
-     * We need to query it directly to manage accurate manual scroll positions.
-     */
-    const getScrollContainer = () => {
-        return scrollContainerRef.current?.querySelector(
-            '[data-radix-scroll-area-viewport]'
-        );
-    };
-
-    const scrollToBottom = () => {
-        chatInnerRef.current?.scrollIntoView(false);
-    };
+    const getScrollContainer = () => viewportRef.current;
 
     const isNearBottom = () => {
         const container = getScrollContainer();
-        if (!container) return;
-
+        if (!container) return false;
         const { scrollTop, scrollHeight, clientHeight } = container;
-
         return (
             scrollHeight - scrollTop - clientHeight < SCROLL_BOTTOM_THRESHOLD
         );
     };
 
-    useEffect(() => {
-        scrollToBottom();
-    }, []);
+    const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
+        const container = getScrollContainer();
+        if (!container) return;
+        container.scrollTo({ top: container.scrollHeight, behavior });
+    };
+
+    const prevIsLoadingMoreRef = useRef(false);
+    useLayoutEffect(() => {
+        if (prevIsLoadingMoreRef.current && !isLoadingMore) {
+            wasLoadingMoreRef.current = true;
+        }
+        prevIsLoadingMoreRef.current = isLoadingMore;
+    }, [isLoadingMore]);
 
     useLayoutEffect(() => {
         const container = getScrollContainer();
-        const oldestMessage = messages[0];
+        if (!container) return;
 
-        if (!container || !oldestMessage) return;
-
-        /**
-         * If the oldest message ID changed, it means historical data was prepended.
-         * We adjust the scrollTop by the height difference to prevent the scrollbar
-         * from jumping and jumping back to the top, keeping the user's view stable.
-         */
-        if (
-            firstMessageIdRef.current &&
-            oldestMessage.id !== firstMessageIdRef.current
-        ) {
-            const newScrollHeight = container.scrollHeight;
-            const heightDifference = newScrollHeight - scrollHeightRef.current;
-
-            container.scrollTop = container.scrollTop + heightDifference;
+        // mounted or conversationId changed
+        if (prevConversationIdRef.current !== conversationId) {
+            prevConversationIdRef.current = conversationId;
+            prevLastMessageIdRef.current = messages[messages.length - 1]?.id;
+            prevScrollHeightRef.current = container.scrollHeight;
+            container.scrollTop = container.scrollHeight;
+            return;
         }
 
-        firstMessageIdRef.current = oldestMessage.id;
-        scrollHeightRef.current = container.scrollHeight;
-    }, [messages]);
+        // chat history loaded
+        if (wasLoadingMoreRef.current) {
+            wasLoadingMoreRef.current = false;
+            const diff = container.scrollHeight - prevScrollHeightRef.current;
+            if (diff > 0) {
+                container.scrollTop += diff;
+            }
+            prevScrollHeightRef.current = container.scrollHeight;
+            return;
+        }
 
-    useEffect(() => {
+        // new message
         const lastMessage = messages[messages.length - 1];
-        const isNewMessage =
-            lastMessage && lastMessage.id !== prevLastMessageId.current;
-
-        console.log(
-            messages,
-            lastMessage,
-            isNewMessage,
-            prevLastMessageId.current,
-            isNearBottom()
-        );
-        if (isNewMessage && isNearBottom()) {
-            scrollToBottom();
+        if (lastMessage && lastMessage.id !== prevLastMessageIdRef.current) {
+            prevLastMessageIdRef.current = lastMessage.id;
+            prevScrollHeightRef.current = container.scrollHeight;
+            if (isNearBottom()) {
+                scrollToBottom('smooth');
+            }
         }
-        prevLastMessageId.current = lastMessage?.id;
-    }, [messages]);
+    }, [messages, conversationId]);
 
-    useEffect(() => {
-        if (isNearBottom()) {
-            scrollToBottom();
+    useLayoutEffect(() => {
+        if (typingUsers.length > 0 && isNearBottom()) {
+            scrollToBottom('smooth');
         }
     }, [typingUsers]);
 
@@ -122,54 +108,46 @@ export function MessageList({
         if (isLoadingMore || !hasMore) return;
 
         const sentinel = sentinelRef.current;
-        const scrollContainer = scrollContainerRef.current;
-        if (!sentinel || !scrollContainer) return;
-
-        const actualScrollContainer = getScrollContainer() || scrollContainer;
+        const container = getScrollContainer();
+        if (!sentinel || !container) return;
 
         const observer = new IntersectionObserver(
-            (entries) => {
-                const entry = entries[0];
-                if (entry?.isIntersecting) {
-                    const oldestMessage = messages[0];
-                    if (!oldestMessage) return;
+            ([entry]) => {
+                if (!entry?.isIntersecting) return;
 
-                    if (actualScrollContainer) {
-                        scrollHeightRef.current =
-                            actualScrollContainer.scrollHeight;
-                    }
+                const oldestMessage = messages[0];
+                if (!oldestMessage) return;
 
-                    loadMoreMessages({
-                        conversationId,
-                        cursor: oldestMessage.id,
-                    });
-                }
+                prevScrollHeightRef.current = container.scrollHeight;
+
+                loadMoreMessages({
+                    conversationId,
+                    cursor: oldestMessage.id,
+                });
             },
             {
-                root: actualScrollContainer,
+                root: container,
                 threshold: 0,
             }
         );
 
         observer.observe(sentinel);
-
         return () => observer.disconnect();
     }, [messages, isLoadingMore, hasMore, conversationId, loadMoreMessages]);
 
     return (
         <ScrollArea
             className="flex-1 bg-muted/20 overflow-y-auto"
-            ref={scrollContainerRef}
+            viewportRef={viewportRef}
         >
-            <div
-                className="flex flex-col gap-4 max-w-4xl mx-auto p-4"
-                ref={chatInnerRef}
-            >
+            <div className="flex flex-col gap-4 max-w-4xl mx-auto p-4">
                 <div ref={sentinelRef} className="h-px"></div>
 
                 {isLoadingMore && (
-                    <div className="text-center text-xs text-muted-foreground py-2">
-                        Loading chat history...
+                    <div className="absolute top-8 left-0 right-0 z-50 flex justify-center pointer-events-none">
+                        <span className="rounded-full bg-muted/90 backdrop-blur-sm border border-border/50 px-3 py-1 text-[11px] font-medium text-muted-foreground shadow-sm animate-pulse">
+                            Loading chat history...
+                        </span>
                     </div>
                 )}
 
