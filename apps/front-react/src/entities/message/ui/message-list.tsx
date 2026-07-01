@@ -55,6 +55,16 @@ export function MessageList({
         container.scrollTo({ top: container.scrollHeight, behavior });
     };
 
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            console.log('test');
+        }, 1000);
+
+        return () => {
+            clearInterval(timerId);
+        };
+    }, []);
+
     const prevIsLoadingMoreRef = useRef(false);
     useLayoutEffect(() => {
         if (prevIsLoadingMoreRef.current && !isLoadingMore) {
@@ -76,7 +86,9 @@ export function MessageList({
             return;
         }
 
-        // chat history loaded
+        // chat history loaded.
+        // TODO: Consider refactoring this to be entirely data-driven too (e.g., tracking the oldest message ID)
+        // instead of relying on the operation-based 'wasLoadingMoreRef' flag.
         if (wasLoadingMoreRef.current) {
             wasLoadingMoreRef.current = false;
             const diff = container.scrollHeight - prevScrollHeightRef.current;

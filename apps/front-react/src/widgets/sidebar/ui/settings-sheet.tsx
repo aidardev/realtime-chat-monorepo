@@ -97,7 +97,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
                         className="w-full flex items-center gap-4 p-4 hover:bg-red-50 hover:text-red-600 text-red-500 transition-colors mt-4 border-t"
                     >
                         <LogOut className="size-5" />
-                        <span className="text-sm font-medium">Выйти</span>
+                        <span className="text-sm font-medium">Logout</span>
                     </button>
                 </div>
             </div>

@@ -8,14 +8,14 @@ export function ChatWindowError({ onRetry }: { onRetry: () => void }) {
                 <AlertCircle className="size-8 text-destructive" />
             </div>
             <div>
-                <h3 className="font-semibold">Не удалось загрузить чат</h3>
+                <h3 className="font-semibold">Failed to load chat</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Попробуйте обновить данные ещё раз.
+                    Please try refreshing the data again.
                 </p>
             </div>
             <Button variant="outline" onClick={onRetry}>
                 <RefreshCw className="mr-2 size-4" />
-                Повторить
+                Retry
             </Button>
         </div>
     );

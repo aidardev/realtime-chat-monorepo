@@ -9,8 +9,7 @@ export function ChatEmpty() {
             <div className="text-center">
                 <h2 className="text-2xl font-bold">Realtime chat</h2>
                 <p className="text-muted-foreground mt-2">
-                    Выберите чат, чтобы начать общение, <br /> или создайте
-                    новый контакт.
+                    Select a chat to start talking, or add a new contact.
                 </p>
             </div>
         </div>

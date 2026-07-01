@@ -7,9 +7,9 @@ export function ChatWindowNotFound() {
                 <MessageSquareDashed className="size-8 text-muted-foreground" />
             </div>
             <div>
-                <h3 className="font-semibold">Чат не найден</h3>
+                <h3 className="font-semibold">Chat not found</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Возможно, он был удалён или у вас нет доступа.
+                    It may have been deleted, or you might not have access.
                 </p>
             </div>
         </div>
