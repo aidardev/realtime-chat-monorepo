@@ -33,7 +33,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
         >
             <SheetHeader className="bg-primary px-4 py-10 text-primary-foreground">
                 <SheetTitle className="text-primary-foreground text-xl font-medium">
-                    Профиль
+                    Profile
                 </SheetTitle>
             </SheetHeader>
 
@@ -44,7 +44,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
 
                 <div className="bg-background px-6 py-4 shadow-sm space-y-3">
                     <Label className="text-xs text-primary font-bold uppercase tracking-wider">
-                        Ваше имя
+                        Your Name
                     </Label>
                     <div className="flex items-center justify-between gap-2">
                         {isEditingName ? (
@@ -84,7 +84,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
 
                 <div className="bg-background px-6 py-4 shadow-sm space-y-3">
                     <Label className="text-xs text-primary font-bold uppercase tracking-wider">
-                        Сведения
+                        Info
                     </Label>
                     <div className="flex items-start justify-between gap-2">
                         {isEditingBio ? (

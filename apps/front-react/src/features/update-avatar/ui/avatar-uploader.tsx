@@ -31,9 +31,7 @@ export function AvatarUploader({ user }: AvatarUploaderProps) {
             </Avatar>
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-full bg-black/60 opacity-0 transition-opacity group-hover:opacity-100 text-white font-medium">
                 <Camera className="size-8" />
-                <span className="text-xs text-center px-2">
-                    Изменить <br /> фото
-                </span>
+                <span className="text-xs text-center px-2">Change avatar</span>
             </div>
         </label>
     );

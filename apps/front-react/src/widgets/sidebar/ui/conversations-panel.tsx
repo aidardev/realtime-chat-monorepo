@@ -78,9 +78,9 @@ function ConversationsPanelEmpty() {
                 <MessageSquareDashed className="size-8 text-muted-foreground" />
             </div>
             <div>
-                <h3 className="font-semibold">Чатов пока нет</h3>
+                <h3 className="font-semibold">No chats yet</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Создайте новый диалог, чтобы начать общение.
+                    Create a new conversation to start chatting.
                 </p>
             </div>
         </div>
@@ -94,14 +94,14 @@ function ConversationsPanelError({ onRetry }: { onRetry: () => void }) {
                 <AlertCircle className="size-8 text-destructive" />
             </div>
             <div>
-                <h3 className="font-semibold">Не удалось загрузить чаты</h3>
+                <h3 className="font-semibold">Failed to load chats</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Проверьте соединение и попробуйте ещё раз.
+                    Check your connection and try again.
                 </p>
             </div>
             <Button variant="outline" onClick={onRetry}>
                 <RefreshCw className="mr-2 size-4" />
-                Повторить
+                Retry
             </Button>
         </div>
     );

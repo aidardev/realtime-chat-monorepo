@@ -48,7 +48,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
         >
             <SheetHeader className="bg-primary px-4 py-10 text-primary-foreground">
                 <SheetTitle className="text-primary-foreground text-xl font-medium">
-                    Настройки
+                    Settings
                 </SheetTitle>
             </SheetHeader>
 
@@ -73,7 +73,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
                 </div>
 
                 <div className="flex-1 overflow-y-auto bg-background">
-                    {menuItems.map((item, index) => (
+                    {/* {menuItems.map((item, index) => (
                         <button
                             key={index}
                             className="w-full flex items-center gap-4 p-4 hover:bg-muted/50 transition-colors border-b last:border-0 text-left"
@@ -90,7 +90,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
                                 )}
                             </div>
                         </button>
-                    ))}
+                    ))} */}
 
                     <button
                         onClick={handleLogout}

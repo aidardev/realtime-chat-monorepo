@@ -1,6 +1,6 @@
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
-import { Paperclip, Send, Smile } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { useMessageComposer } from '../model/use-message-composer';
 
 interface MessageComposerProps {
@@ -23,7 +23,7 @@ export function MessageComposer({ conversationId }: MessageComposerProps) {
                 className="flex items-end gap-2 max-w-4xl mx-auto"
                 onSubmit={handleSubmit}
             >
-                <Button
+                {/* <Button
                     type="button"
                     variant="ghost"
                     size="icon"
@@ -31,16 +31,16 @@ export function MessageComposer({ conversationId }: MessageComposerProps) {
                     disabled={isLoading}
                 >
                     <Paperclip className="size-5" />
-                </Button>
+                </Button> */}
                 <Input
-                    placeholder="Напишите сообщение..."
+                    placeholder="Write a message..."
                     className="min-h-5 bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary shadow-none"
                     value={content}
                     onChange={handleTyping}
                     disabled={isLoading}
                     ref={inputRef}
                 />
-                <Button
+                {/* <Button
                     type="button"
                     variant="ghost"
                     size="icon"
@@ -48,7 +48,7 @@ export function MessageComposer({ conversationId }: MessageComposerProps) {
                     disabled={isLoading}
                 >
                     <Smile className="size-5" />
-                </Button>
+                </Button> */}
                 <Button
                     type="submit"
                     size="icon"

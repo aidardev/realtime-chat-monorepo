@@ -71,7 +71,7 @@ export default function AdminUsersPage() {
                                     <TableCell>
                                         {new Date(
                                             user.createdAt
-                                        ).toLocaleDateString('ru-RU')}
+                                        ).toLocaleDateString('en-GB')}
                                     </TableCell>
                                 </TableRow>
                             ))

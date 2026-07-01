@@ -21,7 +21,7 @@ export function isYesterday(value: string | Date, now = new Date()) {
     return isSameDay(date, yesterday);
 }
 
-export function formatChatTime(value: string | Date, locale = 'ru-RU') {
+export function formatChatTime(value: string | Date, locale = 'en-GB') {
     const date = toDate(value);
 
     return new Intl.DateTimeFormat(locale, {
@@ -30,7 +30,7 @@ export function formatChatTime(value: string | Date, locale = 'ru-RU') {
     }).format(date);
 }
 
-export function formatChatListTime(value: string | Date, locale = 'ru-RU') {
+export function formatChatListTime(value: string | Date, locale = 'en-GB') {
     const date = toDate(value);
     const now = new Date();
 
@@ -39,7 +39,7 @@ export function formatChatListTime(value: string | Date, locale = 'ru-RU') {
     }
 
     if (isYesterday(date, now)) {
-        return 'Вчера';
+        return 'Yesterday';
     }
 
     const isSameYear = date.getFullYear() === now.getFullYear();
@@ -58,12 +58,12 @@ export function formatChatListTime(value: string | Date, locale = 'ru-RU') {
     }).format(date);
 }
 
-export function formatMessageDayLabel(value: string | Date, locale = 'ru-RU') {
+export function formatMessageDayLabel(value: string | Date, locale = 'en-GB') {
     const date = toDate(value);
     const now = new Date();
 
-    if (isSameDay(date, now)) return 'Сегодня';
-    if (isYesterday(date, now)) return 'Вчера';
+    if (isSameDay(date, now)) return 'Today';
+    if (isYesterday(date, now)) return 'Yesterday';
 
     const isSameYear = date.getFullYear() === now.getFullYear();
 

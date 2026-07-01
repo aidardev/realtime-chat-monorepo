@@ -32,7 +32,7 @@ export function ConversationInfoSheet({
         <Sheet open={open} onOpenChange={onOpenChange}>
             <SheetContent className="w-75 sm:w-100">
                 <SheetHeader className="border-b">
-                    <SheetTitle>Информация о контакте</SheetTitle>
+                    <SheetTitle>Contact info</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col items-center gap-4 py-6 px-4">
                     <Avatar className="h-24 w-24">
@@ -60,7 +60,7 @@ export function ConversationInfoSheet({
                     {conversationInfo.bio && (
                         <div className="space-y-1">
                             <Label className="text-xs text-muted-foreground">
-                                О себе
+                                Bio
                             </Label>
                             <p className="text-sm">{conversationInfo.bio}</p>
                         </div>

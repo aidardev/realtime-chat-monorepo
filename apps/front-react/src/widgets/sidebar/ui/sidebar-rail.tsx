@@ -41,7 +41,7 @@ export function SidebarRail() {
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-medium">
-                                        Acme Inc
+                                        Messenger
                                     </span>
                                     <span className="truncate text-xs">
                                         Enterprise
@@ -59,14 +59,14 @@ export function SidebarRail() {
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     tooltip={{
-                                        children: 'Чаты',
+                                        children: 'Chats',
                                         hidden: false,
                                     }}
                                     isActive={true}
                                     className="px-2.5 md:px-2"
                                 >
                                     <MessageSquare />
-                                    <span>Чаты</span>
+                                    <span>Chats</span>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -84,7 +84,7 @@ export function SidebarRail() {
                                     </span>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
-                                    Настройки
+                                    Settings
                                 </TooltipContent>
                             </Tooltip>
                         </SheetTrigger>
@@ -108,7 +108,7 @@ export function SidebarRail() {
                                     </Avatar>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
-                                    Профиль
+                                    Profile
                                 </TooltipContent>
                             </Tooltip>
                         </SheetTrigger>

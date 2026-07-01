@@ -14,7 +14,6 @@ import {
     FieldError,
     FieldGroup,
     FieldLabel,
-    FieldSeparator,
 } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 import { AlertCircle } from 'lucide-react';
@@ -32,14 +31,12 @@ export function LoginForm({
             <Card>
                 <CardHeader className="text-center">
                     <CardTitle className="text-xl">Welcome back</CardTitle>
-                    <CardDescription>
-                        Login with your Apple or Google account
-                    </CardDescription>
+                    <CardDescription>Sign in to your account</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={onSubmit}>
                         <FieldGroup>
-                            <Field>
+                            {/* <Field>
                                 <Button variant="outline" type="button">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +64,7 @@ export function LoginForm({
                             </Field>
                             <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                                 Or continue with
-                            </FieldSeparator>
+                            </FieldSeparator> */}
                             <Controller
                                 name="login"
                                 control={form.control}

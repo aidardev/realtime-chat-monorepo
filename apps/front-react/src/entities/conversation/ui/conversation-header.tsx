@@ -1,14 +1,8 @@
 import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/shared/ui/dropdown-menu';
 import type { ConversationDetails } from '@realtime-chat/schema';
-import { Info, MoreVertical, Phone, Video } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { getConversationHeaderInfo } from '../model/get-conversation-header-info';
 
 interface CovnersationHeaderProps {
@@ -44,7 +38,7 @@ export function ConversationHeader({
             </div>
 
             <div className="flex items-center gap-1">
-                <Button
+                {/* <Button
                     variant="ghost"
                     size="icon"
                     className="text-muted-foreground"
@@ -57,7 +51,7 @@ export function ConversationHeader({
                     className="text-muted-foreground"
                 >
                     <Video className="size-5" />
-                </Button>
+                </Button> */}
 
                 <Button
                     variant="ghost"
@@ -68,7 +62,7 @@ export function ConversationHeader({
                     <Info className="size-5" />
                 </Button>
 
-                <DropdownMenu>
+                {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
                             variant="ghost"
@@ -84,7 +78,7 @@ export function ConversationHeader({
                             Заблокировать
                         </DropdownMenuItem>
                     </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
             </div>
         </header>
     );

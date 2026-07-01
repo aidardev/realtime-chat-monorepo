@@ -1,6 +1,4 @@
-import { Search } from 'lucide-react';
-
-import { SidebarHeader, SidebarInput } from '@/shared/ui/sidebar';
+import { SidebarHeader } from '@/shared/ui/sidebar';
 import { NewConversationDropdown } from './new-conversation-dropdown';
 
 export function ConversationPanelHeader() {
@@ -8,16 +6,17 @@ export function ConversationPanelHeader() {
         <SidebarHeader className="gap-3.5 border-b p-4">
             <div className="flex w-full items-center justify-between">
                 <div className="text-base font-medium text-foreground">
-                    Сообщения
+                    Messages
                 </div>
                 <div className="flex items-center gap-2">
                     <NewConversationDropdown />
                 </div>
             </div>
-            <div className="relative">
+            {/* Todo: search conversations */}
+            {/* <div className="relative">
                 <Search className="absolute left-2 top-2.5 size-4 text-muted-foreground" />
                 <SidebarInput placeholder="Поиск..." className="pl-8" />
-            </div>
+            </div> */}
         </SidebarHeader>
     );
 }

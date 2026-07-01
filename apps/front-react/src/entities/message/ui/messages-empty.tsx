@@ -7,9 +7,9 @@ export function MessagesEmptyState() {
                 <MessageSquareDashed className="size-8 text-muted-foreground" />
             </div>
             <div>
-                <h3 className="font-semibold">Сообщений пока нет</h3>
+                <h3 className="font-semibold">No messages yet</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Напишите первое сообщение, чтобы начать переписку.
+                    Send the first message to start the conversation.
                 </p>
             </div>
         </div>
