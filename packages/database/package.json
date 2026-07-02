@@ -1,8 +1,9 @@
 {
     "name": "@realtime-chat/database",
     "version": "1.0.0",
-    "main": "./src/index.ts",
-    "types": "./src/index.ts",
+    "type": "module",
+    "main": "./dist/src/index.js",
+    "types": "./dist/src/index.d.ts",
     "scripts": {
         "build": "prisma generate && tsc",
         "db:generate": "prisma generate",
