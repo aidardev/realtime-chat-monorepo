@@ -2,11 +2,11 @@
     "$schema": "https://railway.com/railway.schema.json",
     "build": {
         "builder": "RAILPACK",
-        "buildCommand": "pnpm install && pnpm --filter @realtime-chat/database run build && pnpm --filter backend run build"
+        "buildCommand": "pnpm turbo run build --filter=@realtime-chat/database --filter=backend"
     },
     "deploy": {
         "preDeployCommand": "pnpm --filter @realtime-chat/database db:deploy",
-        "startCommand": "node apps/backend/dist/src/index.js",
+        "startCommand": "node apps/backend/dist/index.js",
         "restartPolicyType": "ON_FAILURE"
     }
 }
