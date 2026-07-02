@@ -4,6 +4,7 @@
     "main": "./src/index.ts",
     "types": "./src/index.ts",
     "scripts": {
+        "build": "prisma generate && tsc",
         "db:generate": "prisma generate",
         "db:push": "prisma db push",
         "db:migrate": "prisma migrate dev --skip-generate",
@@ -24,6 +25,9 @@
         "typescript": "latest"
     },
     "exports": {
-        ".": "./src/index.ts"
+        ".": {
+            "types": "./dist/src/index.d.ts",
+            "default": "./dist/src/index.js"
+        }
     }
 }

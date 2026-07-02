@@ -11,7 +11,7 @@ import {
 } from '@/shared/ui/table';
 
 export default function AdminUsersPage() {
-    const { data, isLoading, isFetching } = useGetAdminUsersQuery();
+    const { data, isLoading } = useGetAdminUsersQuery();
 
     const users = data || [];
 

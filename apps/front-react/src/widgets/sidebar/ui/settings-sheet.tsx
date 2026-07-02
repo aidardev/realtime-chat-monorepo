@@ -3,15 +3,7 @@ import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import type { User } from '@realtime-chat/schema';
-import {
-    Bell,
-    CircleHelp,
-    Laptop,
-    Lock,
-    LogOut,
-    Shield,
-    User as UserIcon,
-} from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
 interface SettingsSheetProps {
     user: User;
@@ -20,26 +12,26 @@ interface SettingsSheetProps {
 export function SettingsSheet({ user }: SettingsSheetProps) {
     const { handleLogout } = useLogout();
 
-    const menuItems = [
-        {
-            icon: UserIcon,
-            label: 'Аккаунт',
-            sub: 'Смена номера, удаление аккаунта',
-        },
-        {
-            icon: Lock,
-            label: 'Конфиденциальность',
-            sub: 'Блокировка, статус, фото профиля',
-        },
-        {
-            icon: Shield,
-            label: 'Безопасность',
-            sub: 'Пароль, двухфакторная аутентификация',
-        },
-        { icon: Laptop, label: 'Тема и обои', sub: 'Светлая/темная тема' },
-        { icon: Bell, label: 'Уведомления', sub: 'Звуки сообщений' },
-        { icon: CircleHelp, label: 'Помощь', sub: 'Связаться с нами' },
-    ];
+    // const menuItems = [
+    //     {
+    //         icon: UserIcon,
+    //         label: 'Аккаунт',
+    //         sub: 'Смена номера, удаление аккаунта',
+    //     },
+    //     {
+    //         icon: Lock,
+    //         label: 'Конфиденциальность',
+    //         sub: 'Блокировка, статус, фото профиля',
+    //     },
+    //     {
+    //         icon: Shield,
+    //         label: 'Безопасность',
+    //         sub: 'Пароль, двухфакторная аутентификация',
+    //     },
+    //     { icon: Laptop, label: 'Тема и обои', sub: 'Светлая/темная тема' },
+    //     { icon: Bell, label: 'Уведомления', sub: 'Звуки сообщений' },
+    //     { icon: CircleHelp, label: 'Помощь', sub: 'Связаться с нами' },
+    // ];
 
     return (
         <SheetContent
