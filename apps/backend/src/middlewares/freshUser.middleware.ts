@@ -1,8 +1,8 @@
 import { prisma } from '@realtime-chat/database';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { AppError } from '../lib/exceptions/AppError';
-import { requireUser } from '../lib/helpers';
+import { AppError } from '../lib/exceptions/AppError.js';
+import { requireUser } from '../lib/helpers.js';
 
 export const requireFreshUser = async (
     req: Request,

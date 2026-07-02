@@ -2,9 +2,9 @@ import { prisma } from '@realtime-chat/database';
 import type { LoginInput, RegisterInput } from '@realtime-chat/schema';
 import bcrypt from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
-import { publicUserSelect } from '../lib/db-selects/user.select';
-import { AppError } from '../lib/exceptions/AppError';
-import tokenService from './token.service';
+import { publicUserSelect } from '../lib/db-selects/user.select.js';
+import { AppError } from '../lib/exceptions/AppError.js';
+import tokenService from './token.service.js';
 
 export class AuthService {
     async register(data: RegisterInput, userAgent: string, ip: string) {

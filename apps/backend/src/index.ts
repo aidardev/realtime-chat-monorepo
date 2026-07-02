@@ -5,14 +5,14 @@ import express from 'express';
 import { createServer } from 'http';
 
 import path from 'path';
-import { CORS_OPTIONS } from './config/cors.config';
-import { errorMiddleware } from './middlewares/error.middleware';
-import adminRoutes from './routes/admin.routes';
-import authRoutes from './routes/auth.routes';
-import conversationRoutes from './routes/conversation.routes';
-import meRoutes from './routes/me.routes';
-import userRoutes from './routes/user.routes';
-import { initSocket } from './socket';
+import { CORS_OPTIONS } from './config/cors.config.js';
+import { errorMiddleware } from './middlewares/error.middleware.js';
+import adminRoutes from './routes/admin.routes.js';
+import authRoutes from './routes/auth.routes.js';
+import conversationRoutes from './routes/conversation.routes.js';
+import meRoutes from './routes/me.routes.js';
+import userRoutes from './routes/user.routes.js';
+import { initSocket } from './socket.js';
 
 const app = express();
 app.use(cookieParser());

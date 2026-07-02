@@ -1,8 +1,8 @@
 import { prisma } from '@realtime-chat/database';
 import { ConversationRequest } from '@realtime-chat/schema';
 import { StatusCodes } from 'http-status-codes';
-import { conversationUserSelect } from '../lib/db-selects/user.select';
-import { AppError } from '../lib/exceptions/AppError';
+import { conversationUserSelect } from '../lib/db-selects/user.select.js';
+import { AppError } from '../lib/exceptions/AppError.js';
 
 export class ConversationService {
     async getConversations(userId: string) {

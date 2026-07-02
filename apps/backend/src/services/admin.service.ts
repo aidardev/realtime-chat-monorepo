@@ -1,5 +1,5 @@
 import { prisma } from '@realtime-chat/database';
-import { publicUserSelect } from '../lib/db-selects/user.select';
+import { publicUserSelect } from '../lib/db-selects/user.select.js';
 
 class AdminService {
     async listUsers() {

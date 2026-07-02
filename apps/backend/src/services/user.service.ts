@@ -6,8 +6,8 @@ import path from 'path';
 import {
     conversationUserSelect,
     publicUserSelect,
-} from '../lib/db-selects/user.select';
-import { AppError } from '../lib/exceptions/AppError';
+} from '../lib/db-selects/user.select.js';
+import { AppError } from '../lib/exceptions/AppError.js';
 
 class UserService {
     async findById(userId: string) {

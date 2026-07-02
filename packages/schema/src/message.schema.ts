@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { PublicUserSchema } from './user.schema';
+import { PublicUserSchema } from './user.schema.js';
 
 export const SendMessageSchema = z.object({
     id: z.string(),

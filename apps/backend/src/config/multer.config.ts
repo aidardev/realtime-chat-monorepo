@@ -3,7 +3,7 @@ import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import multer from 'multer';
 import path from 'path';
-import { AppError } from '../lib/exceptions/AppError';
+import { AppError } from '../lib/exceptions/AppError.js';
 
 const uploadDir = 'public/uploads/avatars';
 if (!fs.existsSync(uploadDir)) {

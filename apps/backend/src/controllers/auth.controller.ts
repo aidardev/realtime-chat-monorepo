@@ -1,9 +1,9 @@
 import { LoginSchema, RegisterSchema } from '@realtime-chat/schema';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { REFRESH_COOKIE_OPTIONS } from '../config/cookie.config';
-import { AppError } from '../lib/exceptions/AppError';
-import { authService } from '../services/auth.service';
+import { REFRESH_COOKIE_OPTIONS } from '../config/cookie.config.js';
+import { AppError } from '../lib/exceptions/AppError.js';
+import { authService } from '../services/auth.service.js';
 
 export class AuthController {
     register = async (req: Request, res: Response) => {

@@ -1,6 +1,6 @@
 import * as z from 'zod';
-import { MessagePreviewSchema } from './message.schema';
-import { PublicUserSchema, UserIdSchema } from './user.schema';
+import { MessagePreviewSchema } from './message.schema.js';
+import { PublicUserSchema, UserIdSchema } from './user.schema.js';
 
 export const ConversationParticipantSchema = z.object({
     conversationId: z.string(),

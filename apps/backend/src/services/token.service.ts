@@ -1,6 +1,6 @@
 import { Prisma, prisma } from '@realtime-chat/database';
 import jwt from 'jsonwebtoken';
-import { DecodedToken, UserPayload } from '../types/auth.types';
+import { DecodedToken, UserPayload } from '../types/auth.types.js';
 
 class TokenService {
     // Generate access and refresh token pair

@@ -2,8 +2,8 @@ import { MessageFull } from '@realtime-chat/schema';
 import type { CorsOptions } from 'cors';
 import type { Server as HttpServer } from 'http';
 import { Server, Socket } from 'socket.io';
-import tokenService from './services/token.service';
-import type { DecodedToken } from './types/auth.types';
+import tokenService from './services/token.service.js';
+import type { DecodedToken } from './types/auth.types.js';
 
 interface ServerToClientEvents {
     'message:new': (message: MessageFull) => void;

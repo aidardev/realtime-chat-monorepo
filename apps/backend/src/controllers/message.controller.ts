@@ -1,9 +1,9 @@
 import { SendMessageSchema } from '@realtime-chat/schema';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { requireUser } from '../lib/helpers';
-import { messageService } from '../services/message.service';
-import { IdParams } from '../types/http.types';
+import { requireUser } from '../lib/helpers.js';
+import { messageService } from '../services/message.service.js';
+import { IdParams } from '../types/http.types.js';
 
 class MessageController {
     sendMessage = async (req: Request<IdParams>, res: Response) => {

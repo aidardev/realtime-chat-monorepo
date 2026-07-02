@@ -1,9 +1,9 @@
 import type {
     ConversationDetails,
     ConversationListItem,
-} from './conversation.schema';
-import type { MessageFull } from './message.schema';
-import type { User } from './user.schema';
+} from './conversation.schema.js';
+import type { MessageFull } from './message.schema.js';
+import type { User } from './user.schema.js';
 
 export interface FieldError {
     path: string;

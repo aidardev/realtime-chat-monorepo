@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { uploadAvatarMiddleware } from '../config/multer.config';
-import { userController } from '../controllers/user.controller';
-import { authMiddleware } from '../middlewares/auth.middleware';
-import { requireFreshUser } from '../middlewares/freshUser.middleware';
+import { uploadAvatarMiddleware } from '../config/multer.config.js';
+import { userController } from '../controllers/user.controller.js';
+import { authMiddleware } from '../middlewares/auth.middleware.js';
+import { requireFreshUser } from '../middlewares/freshUser.middleware.js';
 
 const router: Router = Router();
 

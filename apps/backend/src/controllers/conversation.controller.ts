@@ -1,9 +1,9 @@
 import { ConversationRequestSchema } from '@realtime-chat/schema';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { requireUser } from '../lib/helpers';
-import { conversationService } from '../services/conversation.service';
-import { IdParams } from '../types/http.types';
+import { requireUser } from '../lib/helpers.js';
+import { conversationService } from '../services/conversation.service.js';
+import { IdParams } from '../types/http.types.js';
 
 class ConversationController {
     getConversations = async (req: Request, res: Response) => {

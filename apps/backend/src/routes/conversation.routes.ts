@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { conversationController } from '../controllers/conversation.controller';
-import { messageController } from '../controllers/message.controller';
-import { authMiddleware } from '../middlewares/auth.middleware';
-import { requireFreshUser } from '../middlewares/freshUser.middleware';
+import { conversationController } from '../controllers/conversation.controller.js';
+import { messageController } from '../controllers/message.controller.js';
+import { authMiddleware } from '../middlewares/auth.middleware.js';
+import { requireFreshUser } from '../middlewares/freshUser.middleware.js';
 
 const router: Router = Router();
 

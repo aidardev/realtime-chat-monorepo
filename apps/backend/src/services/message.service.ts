@@ -1,9 +1,9 @@
 import { prisma } from '@realtime-chat/database';
 import { MessageFull } from '@realtime-chat/schema';
 import { StatusCodes } from 'http-status-codes';
-import { conversationUserSelect } from '../lib/db-selects/user.select';
-import { AppError } from '../lib/exceptions/AppError';
-import { getIO } from '../socket';
+import { conversationUserSelect } from '../lib/db-selects/user.select.js';
+import { AppError } from '../lib/exceptions/AppError.js';
+import { getIO } from '../socket.js';
 
 class MessageService {
     async createMessage(

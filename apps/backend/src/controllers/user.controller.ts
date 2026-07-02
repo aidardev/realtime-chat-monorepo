@@ -1,9 +1,9 @@
 import { SearchSchema, UpdateProfileSchema } from '@realtime-chat/schema';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { AppError } from '../lib/exceptions/AppError';
-import { requireUser } from '../lib/helpers';
-import { userService } from '../services/user.service';
+import { AppError } from '../lib/exceptions/AppError.js';
+import { requireUser } from '../lib/helpers.js';
+import { userService } from '../services/user.service.js';
 
 class UserController {
     uploadAvatar = async (req: Request, res: Response) => {

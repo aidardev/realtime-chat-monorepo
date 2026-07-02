@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { AppError } from '../lib/exceptions/AppError';
-import tokenService from '../services/token.service';
+import { AppError } from '../lib/exceptions/AppError.js';
+import tokenService from '../services/token.service.js';
 
 export const authMiddleware = (
     req: Request,

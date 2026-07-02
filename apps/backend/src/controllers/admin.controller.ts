@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { adminService } from '../services/admin.service';
+import { adminService } from '../services/admin.service.js';
 
 class AdminController {
     listUsers = async (req: Request, res: Response) => {
