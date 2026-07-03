@@ -2,14 +2,12 @@
     "name": "@realtime-chat/schema",
     "version": "1.0.0",
     "type": "module",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
+            "types": "./src/index.ts",
             "default": "./dist/index.js"
         }
     },
