@@ -28,7 +28,7 @@ Realtime Chat is a full-stack real-time messaging application. The project is im
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 22.12+
 - pnpm 9+
 - PostgreSQL
 
