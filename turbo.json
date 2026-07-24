@@ -6,10 +6,28 @@
             "dependsOn": ["^build"],
             "inputs": ["$TURBO_DEFAULT$", ".env*"],
             "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-            "env": ["DATABASE_URL", "VITE_API_URL", "VITE_BACKEND_URL"]
+            "env": [
+                "NODE_ENV",
+                "DATABASE_URL",
+                "CLIENT_URL",
+                "PORT",
+                "JWT_ACCESS_SECRET",
+                "JWT_REFRESH_SECRET",
+                "VITE_API_URL",
+                "VITE_BACKEND_URL"
+            ]
         },
         "lint": {
-            "dependsOn": ["^lint"]
+            "dependsOn": ["^lint"],
+            "env": [
+                "NODE_ENV",
+                "CLIENT_URL",
+                "PORT",
+                "JWT_ACCESS_SECRET",
+                "JWT_REFRESH_SECRET",
+                "VITE_API_URL",
+                "VITE_BACKEND_URL"
+            ]
         },
         "check-types": {
             "dependsOn": ["^check-types"]

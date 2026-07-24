@@ -7,7 +7,8 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "check-types": "tsc --noEmit"
     },
     "dependencies": {
         "@base-ui/react": "^1.0.0",
@@ -40,6 +41,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
+        "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:^",
         "@types/node": "^24.10.4",
         "@types/react": "^19.2.5",
@@ -52,10 +54,5 @@
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.46.4",
         "vite": "npm:rolldown-vite@7.2.5"
-    },
-    "pnpm": {
-        "overrides": {
-            "vite": "npm:rolldown-vite@7.2.5"
-        }
     }
 }

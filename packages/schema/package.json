@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "type": "module",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "lint": "eslint .",
+        "check-types": "tsc --noEmit"
     },
     "exports": {
         ".": {
@@ -12,6 +14,7 @@
         }
     },
     "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:^",
         "typescript": "latest"
     },
