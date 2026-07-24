@@ -55,16 +55,6 @@ export function MessageList({
         container.scrollTo({ top: container.scrollHeight, behavior });
     };
 
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            console.log('test');
-        }, 1000);
-
-        return () => {
-            clearInterval(timerId);
-        };
-    }, []);
-
     const prevIsLoadingMoreRef = useRef(false);
     useLayoutEffect(() => {
         if (prevIsLoadingMoreRef.current && !isLoadingMore) {
