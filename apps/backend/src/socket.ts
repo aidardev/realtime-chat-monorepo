@@ -22,25 +22,12 @@ interface SocketData {
     user: DecodedToken;
 }
 
-type CustomServer = Server<
-    ClientToServerEvents,
-    ServerToClientEvents,
-    never,
-    SocketData
->;
-type CustomSocket = Socket<
-    ClientToServerEvents,
-    ServerToClientEvents,
-    never,
-    SocketData
->;
+type CustomServer = Server<ClientToServerEvents, ServerToClientEvents, never, SocketData>;
+type CustomSocket = Socket<ClientToServerEvents, ServerToClientEvents, never, SocketData>;
 
 let io: CustomServer | null = null;
 
-export const initSocket = (
-    httpServer: HttpServer,
-    corsOptions: CorsOptions
-): CustomServer => {
+export const initSocket = (httpServer: HttpServer, corsOptions: CorsOptions): CustomServer => {
     io = new Server(httpServer, {
         cors: corsOptions,
     });
@@ -55,9 +42,7 @@ export const initSocket = (
         const userData = tokenService.validateAccessToken(token);
 
         if (!userData) {
-            return next(
-                new Error('Authentication error: Invalid or expired token')
-            );
+            return next(new Error('Authentication error: Invalid or expired token'));
         }
 
         socket.data.user = userData;

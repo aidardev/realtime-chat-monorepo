@@ -9,9 +9,7 @@ class ConversationController {
     getConversations = async (req: Request, res: Response) => {
         const user = requireUser(req);
 
-        const conversations = await conversationService.getConversations(
-            user.id
-        );
+        const conversations = await conversationService.getConversations(user.id);
 
         res.status(StatusCodes.OK).json({
             status: 'success',
@@ -25,10 +23,7 @@ class ConversationController {
         const user = requireUser(req);
         const { id } = req.params;
 
-        const conversation = await conversationService.getConversationById(
-            id,
-            user.id
-        );
+        const conversation = await conversationService.getConversationById(id, user.id);
 
         res.status(StatusCodes.OK).json({
             status: 'success',
@@ -43,10 +38,7 @@ class ConversationController {
 
         const validatedData = ConversationRequestSchema.parse(req.body);
 
-        const conversation = await conversationService.startConversation(
-            user.id,
-            validatedData
-        );
+        const conversation = await conversationService.startConversation(user.id, validatedData);
 
         res.status(StatusCodes.CREATED).json({
             status: 'success',

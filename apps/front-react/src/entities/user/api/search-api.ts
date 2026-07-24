@@ -1,9 +1,5 @@
 import { baseApi } from '@/shared/api/base-api';
-import type {
-    ApiDataResponse,
-    User,
-    UsersResponseData,
-} from '@realtime-chat/schema';
+import type { ApiDataResponse, User, UsersResponseData } from '@realtime-chat/schema';
 
 export const searchApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -14,9 +10,7 @@ export const searchApi = baseApi.injectEndpoints({
                     q: searchTerm,
                 },
             }),
-            transformResponse: (
-                response: ApiDataResponse<UsersResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<UsersResponseData>) => {
                 return response.data.users;
             },
         }),

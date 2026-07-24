@@ -1,30 +1,15 @@
 import { cn } from '@/shared/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/shared/ui/card';
-import {
-    Field,
-    FieldDescription,
-    FieldError,
-    FieldGroup,
-    FieldLabel,
-} from '@/shared/ui/field';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 import { AlertCircle } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useLoginForm } from '../model/use-login-form';
 
-export function LoginForm({
-    className,
-    ...props
-}: React.ComponentProps<'div'>) {
+export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
     const { form, onSubmit, rootError, isLoading } = useLoginForm();
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -70,9 +55,7 @@ export function LoginForm({
                                 control={form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="login">
-                                            Email Or Username
-                                        </FieldLabel>
+                                        <FieldLabel htmlFor="login">Email Or Username</FieldLabel>
                                         <Input
                                             {...field}
                                             id="login"
@@ -81,9 +64,7 @@ export function LoginForm({
                                             placeholder="m@example.com or username"
                                         />
                                         {fieldState.invalid && (
-                                            <FieldError
-                                                errors={[fieldState.error]}
-                                            />
+                                            <FieldError errors={[fieldState.error]} />
                                         )}
                                     </Field>
                                 )}
@@ -94,9 +75,7 @@ export function LoginForm({
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
                                         <div className="flex items-center">
-                                            <FieldLabel htmlFor="password">
-                                                Password
-                                            </FieldLabel>
+                                            <FieldLabel htmlFor="password">Password</FieldLabel>
                                             <a
                                                 href="#"
                                                 className="ml-auto text-sm underline-offset-4 hover:underline"
@@ -111,9 +90,7 @@ export function LoginForm({
                                             type="password"
                                         />
                                         {fieldState.invalid && (
-                                            <FieldError
-                                                errors={[fieldState.error]}
-                                            />
+                                            <FieldError errors={[fieldState.error]} />
                                         )}
                                     </Field>
                                 )}
@@ -122,9 +99,7 @@ export function LoginForm({
                                 <Alert variant="destructive">
                                     <AlertCircle className="h-4 w-4" />
                                     <AlertTitle>Error</AlertTitle>
-                                    <AlertDescription>
-                                        {rootError}
-                                    </AlertDescription>
+                                    <AlertDescription>{rootError}</AlertDescription>
                                 </Alert>
                             )}
                             <Field>
@@ -132,8 +107,7 @@ export function LoginForm({
                                     Login
                                 </Button>
                                 <FieldDescription className="text-center">
-                                    Don&apos;t have an account?{' '}
-                                    <Link to="/register">Sign up</Link>
+                                    Don&apos;t have an account? <Link to="/register">Sign up</Link>
                                 </FieldDescription>
                             </Field>
                         </FieldGroup>
@@ -141,8 +115,7 @@ export function LoginForm({
                 </CardContent>
             </Card>
             <FieldDescription className="px-6 text-center">
-                By clicking continue, you agree to our{' '}
-                <a href="#">Terms of Service</a> and{' '}
+                By clicking continue, you agree to our <a href="#">Terms of Service</a> and{' '}
                 <a href="#">Privacy Policy</a>.
             </FieldDescription>
         </div>

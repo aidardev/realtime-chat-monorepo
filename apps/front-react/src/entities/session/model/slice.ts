@@ -18,10 +18,7 @@ export const sessionSlice = createSlice({
     name: 'session',
     initialState,
     reducers: {
-        setCredentials(
-            state,
-            { payload }: PayloadAction<{ user: User; accessToken: string }>
-        ) {
+        setCredentials(state, { payload }: PayloadAction<{ user: User; accessToken: string }>) {
             state.user = payload.user;
             state.accessToken = payload.accessToken;
             state.isAuth = true;
@@ -36,13 +33,10 @@ export const sessionSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addMatcher(
-            sessionApi.endpoints.getMe.matchFulfilled,
-            (state, { payload }) => {
-                state.user = payload;
-                state.isAuth = true;
-            }
-        );
+        builder.addMatcher(sessionApi.endpoints.getMe.matchFulfilled, (state, { payload }) => {
+            state.user = payload;
+            state.isAuth = true;
+        });
 
         builder.addMatcher(
             sessionApi.endpoints.uploadAvatar.matchFulfilled,

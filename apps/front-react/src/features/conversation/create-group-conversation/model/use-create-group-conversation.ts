@@ -1,9 +1,6 @@
 import { useStartConversationMutation } from '@/entities/conversation';
 import { showApiErrorToast } from '@/shared/lib/show-api-error-toast';
-import {
-    ConversationRequestSchema,
-    type PublicUser,
-} from '@realtime-chat/schema';
+import { ConversationRequestSchema, type PublicUser } from '@realtime-chat/schema';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 

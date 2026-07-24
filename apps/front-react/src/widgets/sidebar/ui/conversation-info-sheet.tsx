@@ -2,12 +2,7 @@ import { getConversationInfoSheetInfo } from '@/entities/conversation/model/get-
 import { getImageUrl } from '@/shared/lib/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Label } from '@/shared/ui/label';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-} from '@/shared/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/shared/ui/sheet';
 import type { ConversationDetails } from '@realtime-chat/schema';
 
 interface ConversationInfoSheetProps {
@@ -23,10 +18,7 @@ export function ConversationInfoSheet({
     open,
     onOpenChange,
 }: ConversationInfoSheetProps) {
-    const conversationInfo = getConversationInfoSheetInfo(
-        conversation,
-        currentUserId
-    );
+    const conversationInfo = getConversationInfoSheetInfo(conversation, currentUserId);
 
     return (
         <Sheet open={open} onOpenChange={onOpenChange}>
@@ -36,32 +28,21 @@ export function ConversationInfoSheet({
                 </SheetHeader>
                 <div className="flex flex-col items-center gap-4 py-6 px-4">
                     <Avatar className="h-24 w-24">
-                        <AvatarImage
-                            src={
-                                getImageUrl(conversationInfo.avatar) ??
-                                undefined
-                            }
-                        />
+                        <AvatarImage src={getImageUrl(conversationInfo.avatar) ?? undefined} />
                         <AvatarFallback className="text-2xl">
                             {conversationInfo.avatarFallback}
                         </AvatarFallback>
                     </Avatar>
                     <div className="text-center">
-                        <h2 className="text-xl font-bold">
-                            {conversationInfo.title}
-                        </h2>
-                        <p className="text-sm text-muted-foreground">
-                            {conversationInfo.username}
-                        </p>
+                        <h2 className="text-xl font-bold">{conversationInfo.title}</h2>
+                        <p className="text-sm text-muted-foreground">{conversationInfo.username}</p>
                     </div>
                 </div>
 
                 <div className="space-y-4 px-4">
                     {conversationInfo.bio && (
                         <div className="space-y-1">
-                            <Label className="text-xs text-muted-foreground">
-                                Bio
-                            </Label>
+                            <Label className="text-xs text-muted-foreground">Bio</Label>
                             <p className="text-sm">{conversationInfo.bio}</p>
                         </div>
                     )}

@@ -8,21 +8,12 @@ interface MessageComposerProps {
 }
 
 export function MessageComposer({ conversationId }: MessageComposerProps) {
-    const {
-        content,
-        handleTyping,
-        handleSubmit,
-        isLoading,
-        canSend,
-        inputRef,
-    } = useMessageComposer(conversationId);
+    const { content, handleTyping, handleSubmit, isLoading, canSend, inputRef } =
+        useMessageComposer(conversationId);
 
     return (
         <div className="p-4 border-t bg-background">
-            <form
-                className="flex items-end gap-2 max-w-4xl mx-auto"
-                onSubmit={handleSubmit}
-            >
+            <form className="flex items-end gap-2 max-w-4xl mx-auto" onSubmit={handleSubmit}>
                 {/* <Button
                     type="button"
                     variant="ghost"
@@ -49,12 +40,7 @@ export function MessageComposer({ conversationId }: MessageComposerProps) {
                 >
                     <Smile className="size-5" />
                 </Button> */}
-                <Button
-                    type="submit"
-                    size="icon"
-                    className="shrink-0"
-                    disabled={!canSend}
-                >
+                <Button type="submit" size="icon" className="shrink-0" disabled={!canSend}>
                     <Send className="size-4" />
                 </Button>
             </form>

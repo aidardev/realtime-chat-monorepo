@@ -1,8 +1,4 @@
-import {
-    SearchUsersSkeletons,
-    UserSearchResult,
-    useUserSearch,
-} from '@/entities/user';
+import { SearchUsersSkeletons, UserSearchResult, useUserSearch } from '@/entities/user';
 import {
     Dialog,
     DialogContent,
@@ -26,16 +22,14 @@ export function CreateDirectConversationDialog({
     open,
     onOpenChange,
 }: CreateDirectConversationDialogProps) {
-    const { users, isFetching, searchTerm, setSearchTerm, isNotFound } =
-        useUserSearch();
+    const { users, isFetching, searchTerm, setSearchTerm, isNotFound } = useUserSearch();
 
     const { handleSelectUser, isCreating } = useCreateDirectConversation(() => {
         onOpenChange(false);
     });
 
     function handleAnimationEnd(e: React.AnimationEvent<HTMLDivElement>) {
-        const isClosed =
-            e.currentTarget.getAttribute('data-state') === 'closed';
+        const isClosed = e.currentTarget.getAttribute('data-state') === 'closed';
 
         if (isClosed) {
             setSearchTerm('');
@@ -44,15 +38,10 @@ export function CreateDirectConversationDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent
-                className="sm:max-w-[425px]"
-                onAnimationEnd={handleAnimationEnd}
-            >
+            <DialogContent className="sm:max-w-[425px]" onAnimationEnd={handleAnimationEnd}>
                 <DialogHeader>
                     <DialogTitle>New Chat</DialogTitle>
-                    <DialogDescription>
-                        Enter a username to start a conversation.
-                    </DialogDescription>
+                    <DialogDescription>Enter a username to start a conversation.</DialogDescription>
                 </DialogHeader>
 
                 <form className="relative" onSubmit={(e) => e.preventDefault()}>
@@ -94,9 +83,7 @@ export function CreateDirectConversationDialog({
 
                     {isNotFound && (
                         <div className="py-10 text-center">
-                            <p className="text-sm font-medium">
-                                No users found
-                            </p>
+                            <p className="text-sm font-medium">No users found</p>
                             <p className="text-xs text-muted-foreground">
                                 No matches for "{searchTerm}"
                             </p>

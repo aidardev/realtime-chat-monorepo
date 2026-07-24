@@ -88,10 +88,7 @@ export class ConversationService {
         }
 
         if (uniqueUserIds.includes(currentUserId)) {
-            throw new AppError(
-                'You cannot add yourself to participants',
-                StatusCodes.BAD_REQUEST
-            );
+            throw new AppError('You cannot add yourself to participants', StatusCodes.BAD_REQUEST);
         }
 
         const participants = [...uniqueUserIds, currentUserId];

@@ -9,10 +9,7 @@ export const requireRole = (...allowedRoles: Role[]) => {
         const user = requireUser(req);
 
         if (!allowedRoles.includes(user.role)) {
-            throw new AppError(
-                'Forbidden: insufficient permissions',
-                StatusCodes.FORBIDDEN
-            );
+            throw new AppError('Forbidden: insufficient permissions', StatusCodes.FORBIDDEN);
         }
 
         next();

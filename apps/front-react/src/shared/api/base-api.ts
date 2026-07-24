@@ -1,9 +1,6 @@
 import type { RootState } from '@/app/store/store';
 import { logout, tokenReceived } from '@/entities/session';
-import type {
-    ApiDataResponse,
-    RefreshTokenResponseData,
-} from '@realtime-chat/schema';
+import type { ApiDataResponse, RefreshTokenResponseData } from '@realtime-chat/schema';
 import {
     createApi,
     fetchBaseQuery,
@@ -27,11 +24,11 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithReauth: BaseQueryFn<
-    string | FetchArgs,
-    unknown,
-    FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+    args,
+    api,
+    extraOptions
+) => {
     await mutex.waitForUnlock();
 
     let result = await baseQuery(args, api, extraOptions);
@@ -47,8 +44,7 @@ const baseQueryWithReauth: BaseQueryFn<
                     api,
                     extraOptions
                 );
-                const data =
-                    refreshResult.data as ApiDataResponse<RefreshTokenResponseData>;
+                const data = refreshResult.data as ApiDataResponse<RefreshTokenResponseData>;
                 if (data && data.data) {
                     const newAccessToken = data.data.accessToken;
                     api.dispatch(tokenReceived(newAccessToken));

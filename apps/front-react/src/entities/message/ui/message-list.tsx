@@ -1,10 +1,7 @@
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import type { MessageFull } from '@realtime-chat/schema';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
-import {
-    useGetTypingUsersQuery,
-    useLoadMoreMessagesMutation,
-} from '../api/message-api';
+import { useGetTypingUsersQuery, useLoadMoreMessagesMutation } from '../api/message-api';
 import { buildMessageListItems } from '../model/build-message-list-items';
 import { MessageBubble } from './message-bubble';
 import { MessageDaySeparator } from './message-day-separator';
@@ -18,12 +15,7 @@ interface MessageListProps {
 
 const SCROLL_BOTTOM_THRESHOLD = 100;
 
-export function MessageList({
-    messages = [],
-    meId,
-    conversationId,
-    hasMore,
-}: MessageListProps) {
+export function MessageList({ messages = [], meId, conversationId, hasMore }: MessageListProps) {
     const viewportRef = useRef<HTMLDivElement>(null);
     const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -33,8 +25,7 @@ export function MessageList({
     const wasLoadingMoreRef = useRef(false);
 
     const { data: typingUsers = [] } = useGetTypingUsersQuery(conversationId);
-    const [loadMoreMessages, { isLoading: isLoadingMore }] =
-        useLoadMoreMessagesMutation();
+    const [loadMoreMessages, { isLoading: isLoadingMore }] = useLoadMoreMessagesMutation();
 
     const items = useMemo(() => buildMessageListItems(messages), [messages]);
 
@@ -44,9 +35,7 @@ export function MessageList({
         const container = getScrollContainer();
         if (!container) return false;
         const { scrollTop, scrollHeight, clientHeight } = container;
-        return (
-            scrollHeight - scrollTop - clientHeight < SCROLL_BOTTOM_THRESHOLD
-        );
+        return scrollHeight - scrollTop - clientHeight < SCROLL_BOTTOM_THRESHOLD;
     };
 
     const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
@@ -138,10 +127,7 @@ export function MessageList({
     }, [messages, isLoadingMore, hasMore, conversationId, loadMoreMessages]);
 
     return (
-        <ScrollArea
-            className="flex-1 bg-muted/20 overflow-y-auto"
-            viewportRef={viewportRef}
-        >
+        <ScrollArea className="flex-1 bg-muted/20 overflow-y-auto" viewportRef={viewportRef}>
             <div className="flex flex-col gap-4 max-w-4xl mx-auto p-4">
                 <div ref={sentinelRef} className="h-px"></div>
 
@@ -157,19 +143,13 @@ export function MessageList({
                     item.type === 'separator' ? (
                         <MessageDaySeparator key={item.id} label={item.label} />
                     ) : (
-                        <MessageBubble
-                            key={item.id}
-                            msg={item.message}
-                            meId={meId}
-                        />
+                        <MessageBubble key={item.id} msg={item.message} meId={meId} />
                     )
                 )}
 
                 {typingUsers.length > 0 && (
                     <div className="text-xs text-muted-foreground italic animate-pulse">
-                        {typingUsers.length === 1
-                            ? 'Typing...'
-                            : 'Several people are typing...'}
+                        {typingUsers.length === 1 ? 'Typing...' : 'Several people are typing...'}
                     </div>
                 )}
             </div>

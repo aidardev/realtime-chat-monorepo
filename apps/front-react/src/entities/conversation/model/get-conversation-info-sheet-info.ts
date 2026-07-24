@@ -1,8 +1,5 @@
 import type { ConversationDetails } from '@realtime-chat/schema';
-import {
-    getConversationContext,
-    type ConversationContext,
-} from './get-conversation-context';
+import { getConversationContext, type ConversationContext } from './get-conversation-context';
 
 export interface ConversationPreviewInfo extends Pick<
     ConversationContext,

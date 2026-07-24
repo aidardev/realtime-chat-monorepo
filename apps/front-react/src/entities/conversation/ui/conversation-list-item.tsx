@@ -9,10 +9,7 @@ interface ConversationListItemProps {
     currentUserId: string;
 }
 
-export function ConversationListItem({
-    conversation,
-    currentUserId,
-}: ConversationListItemProps) {
+export function ConversationListItem({ conversation, currentUserId }: ConversationListItemProps) {
     const preview = getConversationPreviewInfo(conversation, currentUserId);
 
     return (
@@ -24,9 +21,7 @@ export function ConversationListItem({
         >
             <Avatar className="h-10 w-10 border">
                 <AvatarImage src={getImageUrl(preview.avatar) ?? undefined} />
-                <AvatarFallback className="font-semibold">
-                    {preview.avatarFallback}
-                </AvatarFallback>
+                <AvatarFallback className="font-semibold">{preview.avatarFallback}</AvatarFallback>
             </Avatar>
             <div className="flex flex-1 flex-col overflow-hidden">
                 <div className="flex justify-between font-medium">

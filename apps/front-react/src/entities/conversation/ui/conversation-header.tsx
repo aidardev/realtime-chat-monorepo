@@ -22,18 +22,12 @@ export function ConversationHeader({
         <header className="flex h-16 shrink-0 items-center justify-between border-b px-4 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
             <div className="flex items-center gap-3">
                 <Avatar>
-                    <AvatarImage
-                        src={getImageUrl(headerInfo.avatar) ?? undefined}
-                    />
+                    <AvatarImage src={getImageUrl(headerInfo.avatar) ?? undefined} />
                     <AvatarFallback>{headerInfo.avatarFallback}</AvatarFallback>
                 </Avatar>
                 <div>
-                    <div className="font-semibold text-sm">
-                        {headerInfo.title}
-                    </div>
-                    <div className="text-xs text-primary font-medium">
-                        Online
-                    </div>
+                    <div className="font-semibold text-sm">{headerInfo.title}</div>
+                    <div className="text-xs text-primary font-medium">Online</div>
                 </div>
             </div>
 

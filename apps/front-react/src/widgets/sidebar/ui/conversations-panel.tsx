@@ -1,7 +1,4 @@
-import {
-    ConversationList,
-    useGetConversationsQuery,
-} from '@/entities/conversation';
+import { ConversationList, useGetConversationsQuery } from '@/entities/conversation';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { Button } from '@/shared/ui/button';
 import { Sidebar } from '@/shared/ui/sidebar';
@@ -11,37 +8,22 @@ import { ConversationPanelHeader } from './conversations-panel-header';
 
 export function ConversationsPanel() {
     const user = useAppSelector((state) => state.session.user);
-    const {
-        data: conversations = [],
-        isLoading,
-        isError,
-        refetch,
-    } = useGetConversationsQuery();
+    const { data: conversations = [], isLoading, isError, refetch } = useGetConversationsQuery();
 
     if (!user) return null;
 
     return (
-        <Sidebar
-            collapsible="none"
-            className="hidden flex-1 md:flex bg-muted/10 min-w-0"
-        >
+        <Sidebar collapsible="none" className="hidden flex-1 md:flex bg-muted/10 min-w-0">
             <ConversationPanelHeader />
 
             {isLoading && <ConversationsPanelSkeleton />}
 
-            {!isLoading && isError && (
-                <ConversationsPanelError onRetry={refetch} />
-            )}
+            {!isLoading && isError && <ConversationsPanelError onRetry={refetch} />}
 
-            {!isLoading && !isError && conversations.length === 0 && (
-                <ConversationsPanelEmpty />
-            )}
+            {!isLoading && !isError && conversations.length === 0 && <ConversationsPanelEmpty />}
 
             {!isLoading && !isError && conversations.length > 0 && (
-                <ConversationList
-                    conversations={conversations}
-                    currentUserId={user.id}
-                />
+                <ConversationList conversations={conversations} currentUserId={user.id} />
             )}
         </Sidebar>
     );

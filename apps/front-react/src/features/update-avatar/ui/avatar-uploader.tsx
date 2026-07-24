@@ -21,10 +21,7 @@ export function AvatarUploader({ user }: AvatarUploaderProps) {
                 disabled={isLoading}
             />
             <Avatar className="h-40 w-40 border-4 border-background shadow-sm">
-                <AvatarImage
-                    src={getImageUrl(user.avatar)}
-                    className="object-cover"
-                />
+                <AvatarImage src={getImageUrl(user.avatar)} className="object-cover" />
                 <AvatarFallback className="text-4xl bg-muted text-muted-foreground">
                     {user.username?.charAt(0)?.toUpperCase()}
                 </AvatarFallback>

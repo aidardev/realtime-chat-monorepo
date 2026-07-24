@@ -1,8 +1,4 @@
-import {
-    SearchUsersSkeletons,
-    UserSearchResult,
-    useUserSearch,
-} from '@/entities/user';
+import { SearchUsersSkeletons, UserSearchResult, useUserSearch } from '@/entities/user';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
@@ -30,8 +26,7 @@ export function CreateGroupConversationDialog({
     open,
     onOpenChange,
 }: CreateGroupConversationDialogProps) {
-    const { users, isFetching, searchTerm, setSearchTerm, isNotFound } =
-        useUserSearch();
+    const { users, isFetching, searchTerm, setSearchTerm, isNotFound } = useUserSearch();
 
     const {
         groupName,
@@ -49,8 +44,7 @@ export function CreateGroupConversationDialog({
     });
 
     function handleAnimationEnd(e: React.AnimationEvent<HTMLDivElement>) {
-        const isClosed =
-            e.currentTarget.getAttribute('data-state') === 'closed';
+        const isClosed = e.currentTarget.getAttribute('data-state') === 'closed';
 
         if (isClosed) {
             reset();
@@ -60,15 +54,11 @@ export function CreateGroupConversationDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent
-                className="sm:max-w-[425px]"
-                onAnimationEnd={handleAnimationEnd}
-            >
+            <DialogContent className="sm:max-w-[425px]" onAnimationEnd={handleAnimationEnd}>
                 <DialogHeader>
                     <DialogTitle>New Group</DialogTitle>
                     <DialogDescription>
-                        Create a new group conversation with at least 2
-                        participants.
+                        Create a new group conversation with at least 2 participants.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -89,11 +79,7 @@ export function CreateGroupConversationDialog({
                 {selectedUsers.length > 0 && (
                     <div className="flex flex-wrap gap-1 max-h-[80px] overflow-y-auto p-1.5 border rounded-md">
                         {selectedUsers.map((user) => (
-                            <Badge
-                                key={user.id}
-                                variant="secondary"
-                                className="gap-1 pr-1"
-                            >
+                            <Badge key={user.id} variant="secondary" className="gap-1 pr-1">
                                 {user.username}
                                 <button
                                     type="button"
@@ -151,9 +137,7 @@ export function CreateGroupConversationDialog({
 
                     {isNotFound && (
                         <div className="py-6 text-center">
-                            <p className="text-sm font-medium">
-                                No users found
-                            </p>
+                            <p className="text-sm font-medium">No users found</p>
                             <p className="text-xs text-muted-foreground">
                                 No matches for "{searchTerm}"
                             </p>
@@ -167,9 +151,7 @@ export function CreateGroupConversationDialog({
                         disabled={isLoading || !isValid}
                         className="w-full sm:w-auto"
                     >
-                        {isLoading && (
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        )}
+                        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Create Group
                     </Button>
                 </DialogFooter>

@@ -4,11 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { AppError } from '../lib/exceptions/AppError.js';
 import { requireUser } from '../lib/helpers.js';
 
-export const requireFreshUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const requireFreshUser = async (req: Request, res: Response, next: NextFunction) => {
     const tokenUser = requireUser(req);
 
     const dbUser = await prisma.user.findUnique({

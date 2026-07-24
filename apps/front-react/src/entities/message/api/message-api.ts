@@ -1,19 +1,12 @@
 import { baseApi } from '@/shared/api/base-api';
 import { socketService } from '@/shared/lib/socket/socket-service';
-import type {
-    ApiDataResponse,
-    MessageFull,
-    MessagesResponseData,
-} from '@realtime-chat/schema';
+import type { ApiDataResponse, MessageFull, MessagesResponseData } from '@realtime-chat/schema';
 
 export const messageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getMessages: build.query<MessagesResponseData, string>({
-            query: (conversationId) =>
-                `/conversations/${conversationId}/messages`,
-            transformResponse: (
-                response: ApiDataResponse<MessagesResponseData>
-            ) => {
+            query: (conversationId) => `/conversations/${conversationId}/messages`,
+            transformResponse: (response: ApiDataResponse<MessagesResponseData>) => {
                 return {
                     messages: [...response.data.messages].reverse(),
                     hasMore: response.data.hasMore,
@@ -25,13 +18,8 @@ export const messageApi = baseApi.injectEndpoints({
             ) {
                 const handleNewMessage = (newMessage: MessageFull) => {
                     updateCachedData((draft) => {
-                        const exists = draft.messages.some(
-                            (m) => m.id === newMessage.id
-                        );
-                        if (
-                            !exists &&
-                            conversationId === newMessage.conversationId
-                        ) {
+                        const exists = draft.messages.some((m) => m.id === newMessage.id);
+                        if (!exists && conversationId === newMessage.conversationId) {
                             draft.messages.push(newMessage);
                         }
                     });
@@ -58,31 +46,20 @@ export const messageApi = baseApi.injectEndpoints({
                     cursor,
                 },
             }),
-            transformResponse: (
-                response: ApiDataResponse<MessagesResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<MessagesResponseData>) => {
                 return {
                     messages: [...response.data.messages].reverse(),
                     hasMore: response.data.hasMore,
                 };
             },
-            async onQueryStarted(
-                { conversationId },
-                { dispatch, queryFulfilled }
-            ) {
+            async onQueryStarted({ conversationId }, { dispatch, queryFulfilled }) {
                 try {
                     const { data: olderMessages } = await queryFulfilled;
                     dispatch(
-                        messageApi.util.updateQueryData(
-                            'getMessages',
-                            conversationId,
-                            (draft) => {
-                                draft.messages.unshift(
-                                    ...olderMessages.messages
-                                );
-                                draft.hasMore = olderMessages.hasMore;
-                            }
-                        )
+                        messageApi.util.updateQueryData('getMessages', conversationId, (draft) => {
+                            draft.messages.unshift(...olderMessages.messages);
+                            draft.hasMore = olderMessages.hasMore;
+                        })
                     );
                 } catch {}
             },
@@ -96,10 +73,7 @@ export const messageApi = baseApi.injectEndpoints({
                 try {
                     await cacheDataLoaded;
 
-                    const handleStart = (data: {
-                        conversationId: string;
-                        userId: string;
-                    }) => {
+                    const handleStart = (data: { conversationId: string; userId: string }) => {
                         if (data.conversationId === conversationId) {
                             updateCachedData((draft) => {
                                 if (!draft.includes(data.userId)) {
@@ -109,10 +83,7 @@ export const messageApi = baseApi.injectEndpoints({
                         }
                     };
 
-                    const handleStop = (data: {
-                        conversationId: string;
-                        userId: string;
-                    }) => {
+                    const handleStop = (data: { conversationId: string; userId: string }) => {
                         if (data.conversationId === conversationId) {
                             updateCachedData((draft) => {
                                 return draft.filter((id) => id !== data.userId);
@@ -133,8 +104,5 @@ export const messageApi = baseApi.injectEndpoints({
     }),
 });
 
-export const {
-    useGetMessagesQuery,
-    useGetTypingUsersQuery,
-    useLoadMoreMessagesMutation,
-} = messageApi;
+export const { useGetMessagesQuery, useGetTypingUsersQuery, useLoadMoreMessagesMutation } =
+    messageApi;

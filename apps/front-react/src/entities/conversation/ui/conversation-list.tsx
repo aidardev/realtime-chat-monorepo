@@ -1,8 +1,4 @@
-import {
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-} from '@/shared/ui/sidebar';
+import { SidebarContent, SidebarGroup, SidebarGroupContent } from '@/shared/ui/sidebar';
 import type { ConversationListItem as ConversationListItemSchema } from '@realtime-chat/schema';
 import { ConversationListItem } from './conversation-list-item';
 
@@ -11,10 +7,7 @@ interface ConversationListProps {
     currentUserId: string;
 }
 
-export function ConversationList({
-    conversations = [],
-    currentUserId,
-}: ConversationListProps) {
+export function ConversationList({ conversations = [], currentUserId }: ConversationListProps) {
     return (
         <SidebarContent>
             <SidebarGroup className="px-0">

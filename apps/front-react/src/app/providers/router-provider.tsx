@@ -39,10 +39,7 @@ export function AppRouter() {
             <Route element={<PrivateRoute />}>
                 <Route path="/" element={<DashboardLayout />}>
                     <Route index element={<ChatEmpty />} />
-                    <Route
-                        path="conversations/:conversationId"
-                        element={<ChatWindow />}
-                    />
+                    <Route path="conversations/:conversationId" element={<ChatWindow />} />
                 </Route>
             </Route>
             <Route element={<AdminRoute />}>

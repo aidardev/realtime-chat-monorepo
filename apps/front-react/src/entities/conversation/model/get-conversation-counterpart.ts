@@ -1,12 +1,6 @@
-import type {
-    ConversationDetails,
-    ConversationListItem,
-    PublicUser,
-} from '@realtime-chat/schema';
+import type { ConversationDetails, ConversationListItem, PublicUser } from '@realtime-chat/schema';
 
-export type ConversationWithParticipants =
-    | ConversationListItem
-    | ConversationDetails;
+export type ConversationWithParticipants = ConversationListItem | ConversationDetails;
 
 export function getConversationCounterpart(
     conversation: ConversationWithParticipants,

@@ -6,11 +6,7 @@ import { AppError } from '../lib/exceptions/AppError.js';
 import { getIO } from '../socket.js';
 
 class MessageService {
-    async createMessage(
-        senderId: string,
-        conversationId: string,
-        content: string
-    ) {
+    async createMessage(senderId: string, conversationId: string, content: string) {
         const accessibleConversation = await prisma.conversation.findFirst({
             where: {
                 id: conversationId,
@@ -68,10 +64,7 @@ class MessageService {
         };
 
         const io = getIO();
-        io.to(`conversation:${message.conversationId}`).emit(
-            'message:new',
-            messageForClient
-        );
+        io.to(`conversation:${message.conversationId}`).emit('message:new', messageForClient);
 
         return message;
     }
@@ -119,9 +112,7 @@ class MessageService {
 
         const hasMore = messagesPlusOne.length > limit;
 
-        const messages = hasMore
-            ? messagesPlusOne.slice(0, limit)
-            : messagesPlusOne;
+        const messages = hasMore ? messagesPlusOne.slice(0, limit) : messagesPlusOne;
 
         return {
             messages,

@@ -29,16 +29,11 @@ export function UserSearchResult({
         >
             <div className="flex items-center gap-3 min-w-0">
                 <Avatar className="h-10 w-10 border shrink-0">
-                    <AvatarImage
-                        src={getImageUrl(user.avatar)}
-                        alt={user.name}
-                    />
+                    <AvatarImage src={getImageUrl(user.avatar)} alt={user.name} />
                     <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col items-start text-sm truncate">
-                    <span className="font-medium truncate w-full text-left">
-                        {user.name}
-                    </span>
+                    <span className="font-medium truncate w-full text-left">{user.name}</span>
                     <span className="text-muted-foreground text-xs italic truncate w-full text-left">
                         @{user.username}
                     </span>

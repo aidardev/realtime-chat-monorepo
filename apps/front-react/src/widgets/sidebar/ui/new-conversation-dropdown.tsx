@@ -11,9 +11,7 @@ import { MessageSquarePlus, Plus, Users } from 'lucide-react';
 import { useState } from 'react';
 
 export function NewConversationDropdown() {
-    const [activeDialog, setActiveDialog] = useState<'direct' | 'group' | null>(
-        null
-    );
+    const [activeDialog, setActiveDialog] = useState<'direct' | 'group' | null>(null);
 
     return (
         <>

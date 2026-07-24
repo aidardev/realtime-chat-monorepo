@@ -1,7 +1,4 @@
-import type {
-    ConversationDetails,
-    ConversationListItem,
-} from './conversation.schema.js';
+import type { ConversationDetails, ConversationListItem } from './conversation.schema.js';
 import type { MessageFull } from './message.schema.js';
 import type { User } from './user.schema.js';
 

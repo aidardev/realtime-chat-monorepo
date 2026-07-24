@@ -1,9 +1,5 @@
 import { baseApi } from '@/shared/api/base-api';
-import type {
-    ApiDataResponse,
-    AuthResponseData,
-    LoginInput,
-} from '@realtime-chat/schema';
+import type { ApiDataResponse, AuthResponseData, LoginInput } from '@realtime-chat/schema';
 
 export const loginApi = baseApi.injectEndpoints({
     endpoints: (build) => ({

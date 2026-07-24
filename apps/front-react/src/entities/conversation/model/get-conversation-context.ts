@@ -28,9 +28,7 @@ export function getConversationContext(
 
     const avatarFallback = conversation.isGroup
         ? conversation.name?.slice(0, 2).toUpperCase() || 'GC'
-        : (counterpart?.name || counterpart?.username || 'UN')
-              .slice(0, 2)
-              .toUpperCase();
+        : (counterpart?.name || counterpart?.username || 'UN').slice(0, 2).toUpperCase();
 
     return {
         title,

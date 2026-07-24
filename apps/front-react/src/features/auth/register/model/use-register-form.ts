@@ -2,10 +2,7 @@ import { setCredentials } from '@/entities/session';
 import { handleApiError } from '@/shared/lib/handle-api-error';
 import { useAppDispatch } from '@/shared/lib/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-    RegisterFormSchema,
-    type RegisterFormInput,
-} from '@realtime-chat/schema';
+import { RegisterFormSchema, type RegisterFormInput } from '@realtime-chat/schema';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';

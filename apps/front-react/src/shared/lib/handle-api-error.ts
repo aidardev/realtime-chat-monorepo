@@ -6,9 +6,7 @@ import { toast } from 'sonner';
 /**
  * Type predicate: проверяет, является ли ошибка ответом от RTK Query (HTTP error)
  */
-export function isFetchBaseQueryError(
-    error: unknown
-): error is FetchBaseQueryError {
+export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
     return typeof error === 'object' && error != null && 'status' in error;
 }
 

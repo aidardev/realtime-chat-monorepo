@@ -3,12 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { ZodError } from 'zod';
 import { AppError } from '../lib/exceptions/AppError.js';
 
-export const errorMiddleware = (
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof ZodError) {
         res.status(StatusCodes.BAD_REQUEST).json({
             status: 'fail',

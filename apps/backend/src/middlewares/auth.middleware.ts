@@ -3,17 +3,10 @@ import { StatusCodes } from 'http-status-codes';
 import { AppError } from '../lib/exceptions/AppError.js';
 import tokenService from '../services/token.service.js';
 
-export const authMiddleware = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-        throw new AppError(
-            'Authorization header missing',
-            StatusCodes.UNAUTHORIZED
-        );
+        throw new AppError('Authorization header missing', StatusCodes.UNAUTHORIZED);
     }
 
     const [bearer, token] = authHeader.split(' ');
@@ -26,10 +19,7 @@ export const authMiddleware = (
 
     const payload = tokenService.validateAccessToken(token);
     if (!payload) {
-        throw new AppError(
-            'Invalid or expired access token',
-            StatusCodes.UNAUTHORIZED
-        );
+        throw new AppError('Invalid or expired access token', StatusCodes.UNAUTHORIZED);
     }
 
     req.user = payload;

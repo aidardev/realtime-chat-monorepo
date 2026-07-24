@@ -1,9 +1,6 @@
 import { formatChatListTime } from '@/shared/lib/date';
 import type { ConversationListItem } from '@realtime-chat/schema';
-import {
-    getConversationContext,
-    type ConversationContext,
-} from './get-conversation-context';
+import { getConversationContext, type ConversationContext } from './get-conversation-context';
 
 export interface ConversationPreviewInfo extends Pick<
     ConversationContext,

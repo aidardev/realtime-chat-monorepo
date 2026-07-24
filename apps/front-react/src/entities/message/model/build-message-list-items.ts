@@ -5,9 +5,7 @@ type MessageListItem =
     | { type: 'separator'; id: string; label: string }
     | { type: 'message'; id: string; message: MessageFull };
 
-export function buildMessageListItems(
-    messages: MessageFull[]
-): MessageListItem[] {
+export function buildMessageListItems(messages: MessageFull[]): MessageListItem[] {
     const items: MessageListItem[] = [];
 
     messages.forEach((msg, index) => {

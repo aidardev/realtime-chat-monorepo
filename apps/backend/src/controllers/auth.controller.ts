@@ -12,11 +12,7 @@ export class AuthController {
         const userAgent = req.headers['user-agent'] || 'unknown';
         const ip = req.ip || 'unknown';
 
-        const { tokens, user } = await authService.register(
-            validatedData,
-            userAgent,
-            ip
-        );
+        const { tokens, user } = await authService.register(validatedData, userAgent, ip);
 
         res.cookie('refreshToken', tokens.refreshToken, REFRESH_COOKIE_OPTIONS);
 
@@ -36,11 +32,7 @@ export class AuthController {
         const userAgent = req.headers['user-agent'] || 'unknown';
         const ip = req.ip || 'unknown';
 
-        const { tokens, user } = await authService.login(
-            validatedData,
-            userAgent,
-            ip
-        );
+        const { tokens, user } = await authService.login(validatedData, userAgent, ip);
 
         res.cookie('refreshToken', tokens.refreshToken, REFRESH_COOKIE_OPTIONS);
 
@@ -63,17 +55,9 @@ export class AuthController {
             throw new AppError('Unauthorized', StatusCodes.UNAUTHORIZED);
         }
 
-        const newTokens = await authService.refresh(
-            refreshToken,
-            userAgent,
-            ip
-        );
+        const newTokens = await authService.refresh(refreshToken, userAgent, ip);
 
-        res.cookie(
-            'refreshToken',
-            newTokens.refreshToken,
-            REFRESH_COOKIE_OPTIONS
-        );
+        res.cookie('refreshToken', newTokens.refreshToken, REFRESH_COOKIE_OPTIONS);
 
         res.status(StatusCodes.OK).json({
             status: 'success',

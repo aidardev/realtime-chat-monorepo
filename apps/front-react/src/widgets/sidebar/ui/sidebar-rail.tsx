@@ -30,22 +30,14 @@ export function SidebarRail() {
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton
-                            size="lg"
-                            asChild
-                            className="md:h-8 md:p-0"
-                        >
+                        <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
                             <a href="#">
                                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                                     <Command className="size-4" />
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
-                                    <span className="truncate font-medium">
-                                        Messenger
-                                    </span>
-                                    <span className="truncate text-xs">
-                                        Enterprise
-                                    </span>
+                                    <span className="truncate font-medium">Messenger</span>
+                                    <span className="truncate text-xs">Enterprise</span>
                                 </div>
                             </a>
                         </SidebarMenuButton>
@@ -83,9 +75,7 @@ export function SidebarRail() {
                                         <LucideSettings className="size-5" />
                                     </span>
                                 </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    Settings
-                                </TooltipContent>
+                                <TooltipContent side="right">Settings</TooltipContent>
                             </Tooltip>
                         </SheetTrigger>
                         <SettingsSheet user={user} />
@@ -101,15 +91,11 @@ export function SidebarRail() {
                                             alt={user.name || ''}
                                         />
                                         <AvatarFallback className="rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                                            {user.username
-                                                .slice(0, 2)
-                                                .toUpperCase()}
+                                            {user.username.slice(0, 2).toUpperCase()}
                                         </AvatarFallback>
                                     </Avatar>
                                 </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    Profile
-                                </TooltipContent>
+                                <TooltipContent side="right">Profile</TooltipContent>
                             </Tooltip>
                         </SheetTrigger>
                         <ProfileSheet user={user} />

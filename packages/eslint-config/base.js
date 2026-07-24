@@ -5,13 +5,7 @@ import tseslint from 'typescript-eslint';
 
 export const config = [
     {
-        ignores: [
-            'dist/**',
-            'build/**',
-            'coverage/**',
-            'node_modules/**',
-            'src/generated/**',
-        ],
+        ignores: ['dist/**', 'build/**', 'coverage/**', 'node_modules/**', 'src/generated/**'],
     },
 
     js.configs.recommended,

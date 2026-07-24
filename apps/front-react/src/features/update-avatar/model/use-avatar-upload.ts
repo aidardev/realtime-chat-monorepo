@@ -4,9 +4,7 @@ import { toast } from 'sonner';
 export const useAvatarUpload = () => {
     const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();
 
-    const handleFileChange = async (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 

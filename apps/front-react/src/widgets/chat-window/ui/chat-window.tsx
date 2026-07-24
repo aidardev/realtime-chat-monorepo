@@ -1,7 +1,4 @@
-import {
-    ConversationHeader,
-    useGetConversationQuery,
-} from '@/entities/conversation';
+import { ConversationHeader, useGetConversationQuery } from '@/entities/conversation';
 import { MessageList, useGetMessagesQuery } from '@/entities/message';
 import { MessagesEmptyState } from '@/entities/message/ui/messages-empty';
 import { MessageComposer } from '@/features/message/send-message';
@@ -34,13 +31,9 @@ export function ChatWindow() {
         };
     }, [conversationId]);
 
-    const conversationQuery = useGetConversationQuery(
-        conversationId ?? skipToken
-    );
+    const conversationQuery = useGetConversationQuery(conversationId ?? skipToken);
     const messagesQuery = useGetMessagesQuery(
-        conversationQuery.isSuccess && conversationId
-            ? conversationId
-            : skipToken
+        conversationQuery.isSuccess && conversationId ? conversationId : skipToken
     );
 
     if (!me || !conversationId) {
@@ -104,10 +97,7 @@ export function ChatWindow() {
                 <MessagesEmptyState />
             )}
 
-            <MessageComposer
-                conversationId={conversationId}
-                key={conversationId}
-            />
+            <MessageComposer conversationId={conversationId} key={conversationId} />
         </div>
     );
 }

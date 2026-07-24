@@ -3,10 +3,7 @@ import { SearchInput, User } from '@realtime-chat/schema';
 import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import path from 'path';
-import {
-    conversationUserSelect,
-    publicUserSelect,
-} from '../lib/db-selects/user.select.js';
+import { conversationUserSelect, publicUserSelect } from '../lib/db-selects/user.select.js';
 import { AppError } from '../lib/exceptions/AppError.js';
 
 class UserService {
@@ -51,13 +48,7 @@ class UserService {
             try {
                 const fileName = path.basename(oldAvatarUrl);
 
-                const filePath = path.join(
-                    process.cwd(),
-                    'public',
-                    'uploads',
-                    'avatars',
-                    fileName
-                );
+                const filePath = path.join(process.cwd(), 'public', 'uploads', 'avatars', fileName);
 
                 fs.unlink(filePath, (err) => {
                     if (err) throw err;
@@ -65,9 +56,7 @@ class UserService {
                 });
             } catch (error: any) {
                 if (error.code === 'ENOENT') {
-                    console.warn(
-                        'Old avatar was not found on disk. Skipping deletion'
-                    );
+                    console.warn('Old avatar was not found on disk. Skipping deletion');
                 } else {
                     console.error('Error deleting old avatar:', error);
                 }

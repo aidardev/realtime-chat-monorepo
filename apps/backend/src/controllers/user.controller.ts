@@ -33,10 +33,7 @@ class UserController {
 
         const currentUserId = user.id;
 
-        const users = await userService.searchUsers(
-            validatedQuery,
-            currentUserId
-        );
+        const users = await userService.searchUsers(validatedQuery, currentUserId);
 
         res.status(StatusCodes.OK).json({
             status: 'success',

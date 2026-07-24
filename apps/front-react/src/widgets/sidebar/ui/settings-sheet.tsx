@@ -34,10 +34,7 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
     // ];
 
     return (
-        <SheetContent
-            side="left"
-            className="w-[350px] p-0 gap-0 border-r sm:max-w-[350px]"
-        >
+        <SheetContent side="left" className="w-[350px] p-0 gap-0 border-r sm:max-w-[350px]">
             <SheetHeader className="bg-primary px-4 py-10 text-primary-foreground">
                 <SheetTitle className="text-primary-foreground text-xl font-medium">
                     Settings
@@ -48,14 +45,10 @@ export function SettingsSheet({ user }: SettingsSheetProps) {
                 <div className="flex items-center gap-4 p-4 bg-background shadow-sm mb-2 cursor-pointer hover:bg-muted/50 transition-colors">
                     <Avatar className="h-16 w-16">
                         <AvatarImage src={getImageUrl(user.avatar)} />
-                        <AvatarFallback>
-                            {user.username?.charAt(0)}
-                        </AvatarFallback>
+                        <AvatarFallback>{user.username?.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                        <span className="font-medium text-lg">
-                            {user.name || user.username}
-                        </span>
+                        <span className="font-medium text-lg">{user.name || user.username}</span>
                         {user.bio && (
                             <span className="text-sm text-muted-foreground truncate max-w-[200px]">
                                 {user.bio}

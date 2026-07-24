@@ -60,18 +60,12 @@ export class AuthService {
         });
 
         if (!user) {
-            throw new AppError(
-                'Invalid login or password',
-                StatusCodes.UNAUTHORIZED
-            );
+            throw new AppError('Invalid login or password', StatusCodes.UNAUTHORIZED);
         }
 
         const isValid = await bcrypt.compare(data.password, user.password);
         if (!isValid) {
-            throw new AppError(
-                'Invalid login or password',
-                StatusCodes.UNAUTHORIZED
-            );
+            throw new AppError('Invalid login or password', StatusCodes.UNAUTHORIZED);
         }
 
         return prisma.$transaction(async (tx) => {

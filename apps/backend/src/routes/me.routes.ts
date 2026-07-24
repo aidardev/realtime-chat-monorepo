@@ -9,11 +9,7 @@ const router: Router = Router();
 router.use(authMiddleware, requireFreshUser);
 
 router.get('/', userController.getMe);
-router.post(
-    '/avatar',
-    uploadAvatarMiddleware.single('avatar'),
-    userController.uploadAvatar
-);
+router.post('/avatar', uploadAvatarMiddleware.single('avatar'), userController.uploadAvatar);
 router.patch('/', userController.updateProfile);
 
 export default router;

@@ -27,10 +27,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
     } = useProfileSheetForm(user);
 
     return (
-        <SheetContent
-            side="left"
-            className="w-87.5 p-0 gap-0 border-r sm:max-w-87.5"
-        >
+        <SheetContent side="left" className="w-87.5 p-0 gap-0 border-r sm:max-w-87.5">
             <SheetHeader className="bg-primary px-4 py-10 text-primary-foreground">
                 <SheetTitle className="text-primary-foreground text-xl font-medium">
                     Profile
@@ -66,9 +63,7 @@ export function ProfileSheet({ user }: ProfileSheetProps) {
                             </div>
                         ) : (
                             <>
-                                <span className="text-base truncate flex-1">
-                                    {name}
-                                </span>
+                                <span className="text-base truncate flex-1">{name}</span>
                                 <Button
                                     size="icon"
                                     variant="ghost"

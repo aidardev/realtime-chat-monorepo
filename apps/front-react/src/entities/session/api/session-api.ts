@@ -12,9 +12,7 @@ export const sessionApi = baseApi.injectEndpoints({
         getMe: build.query<User, void>({
             query: () => '/me',
             providesTags: ['Session'],
-            transformResponse: (
-                response: ApiDataResponse<UserResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<UserResponseData>) => {
                 return response.data.user;
             },
         }),
@@ -29,9 +27,7 @@ export const sessionApi = baseApi.injectEndpoints({
                 body: formData,
                 method: 'post',
             }),
-            transformResponse: (
-                response: ApiDataResponse<UserResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<UserResponseData>) => {
                 return response.data.user;
             },
         }),
@@ -42,9 +38,7 @@ export const sessionApi = baseApi.injectEndpoints({
                 body,
                 method: 'PATCH',
             }),
-            transformResponse: (
-                response: ApiDataResponse<UserResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<UserResponseData>) => {
                 return response.data.user;
             },
         }),

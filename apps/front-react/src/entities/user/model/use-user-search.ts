@@ -6,12 +6,9 @@ export const useUserSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm);
 
-    const { data, isLoading, isFetching } = useSearchQuery(
-        debouncedSearchTerm,
-        {
-            skip: debouncedSearchTerm.length < 2,
-        }
-    );
+    const { data, isLoading, isFetching } = useSearchQuery(debouncedSearchTerm, {
+        skip: debouncedSearchTerm.length < 2,
+    });
 
     const users = debouncedSearchTerm.length < 2 ? [] : (data ?? []);
     const hasSearched = debouncedSearchTerm.length >= 2;

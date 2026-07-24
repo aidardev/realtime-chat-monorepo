@@ -46,6 +46,4 @@ export const ConversationRequestSchema = z.discriminatedUnion('isGroup', [
 export type ConversationListItem = z.infer<typeof ConversationListItemSchema>;
 export type ConversationDetails = z.infer<typeof ConversationDetailsSchema>;
 export type ConversationRequest = z.infer<typeof ConversationRequestSchema>;
-export type GroupConversationRequest = z.infer<
-    typeof GroupConversationRequestSchema
->;
+export type GroupConversationRequest = z.infer<typeof GroupConversationRequestSchema>;

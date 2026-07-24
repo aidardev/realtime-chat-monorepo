@@ -1,14 +1,7 @@
 import { useGetAdminUsersQuery } from '@/features/admin';
 import { Badge } from '@/shared/ui/badge';
 import { Skeleton } from '@/shared/ui/skeleton';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/shared/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/table';
 
 export default function AdminUsersPage() {
     const { data, isLoading } = useGetAdminUsersQuery();
@@ -53,25 +46,19 @@ export default function AdminUsersPage() {
                         ) : (
                             users.map((user) => (
                                 <TableRow key={user.id}>
-                                    <TableCell className="font-medium">
-                                        {user.username}
-                                    </TableCell>
+                                    <TableCell className="font-medium">{user.username}</TableCell>
                                     <TableCell>{user.email}</TableCell>
                                     <TableCell>
                                         <Badge
                                             variant={
-                                                user.role === 'ADMIN'
-                                                    ? 'default'
-                                                    : 'secondary'
+                                                user.role === 'ADMIN' ? 'default' : 'secondary'
                                             }
                                         >
                                             {user.role}
                                         </Badge>
                                     </TableCell>
                                     <TableCell>
-                                        {new Date(
-                                            user.createdAt
-                                        ).toLocaleDateString('en-GB')}
+                                        {new Date(user.createdAt).toLocaleDateString('en-GB')}
                                     </TableCell>
                                 </TableRow>
                             ))

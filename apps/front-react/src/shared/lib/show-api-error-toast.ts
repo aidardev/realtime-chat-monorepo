@@ -1,10 +1,7 @@
 import { toast } from 'sonner';
 import { isFetchBaseQueryError } from './handle-api-error';
 
-export function showApiErrorToast(
-    error: unknown,
-    fallbackMessage = 'Something went wrong'
-) {
+export function showApiErrorToast(error: unknown, fallbackMessage = 'Something went wrong') {
     if (isFetchBaseQueryError(error)) {
         const data = error.data;
 

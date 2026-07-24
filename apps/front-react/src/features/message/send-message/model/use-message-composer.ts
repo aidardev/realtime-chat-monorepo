@@ -1,12 +1,6 @@
 import { showApiErrorToast } from '@/shared/lib/show-api-error-toast';
 import { socketService } from '@/shared/lib/socket/socket-service';
-import {
-    useEffect,
-    useRef,
-    useState,
-    type ChangeEvent,
-    type FormEvent,
-} from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useSendMessageMutation } from '../api/send-message-api';
 
 export const useMessageComposer = (conversationId: string) => {

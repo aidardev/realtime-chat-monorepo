@@ -16,9 +16,7 @@ export const messageApi = baseApi.injectEndpoints({
                 },
                 method: 'post',
             }),
-            transformResponse: (
-                response: ApiDataResponse<MessageResponseData>
-            ) => {
+            transformResponse: (response: ApiDataResponse<MessageResponseData>) => {
                 return response.data.message;
             },
             // temp fix for updating conversations list after sending message, probably needs improvement in the future, what if participant sends me message
