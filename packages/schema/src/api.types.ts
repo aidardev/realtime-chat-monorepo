@@ -10,7 +10,7 @@ export interface FieldError {
     message: string;
 }
 
-export interface ApiBaseSuccess {
+export interface ApiMessageResponse {
     status: 'success';
     message?: string;
 }
@@ -21,11 +21,9 @@ export interface ApiErrorResponse {
     errors?: FieldError[];
 }
 
-export interface ApiDataResponse<T> extends ApiBaseSuccess {
+export interface ApiDataResponse<T> extends ApiMessageResponse {
     data: T;
 }
-
-export interface ApiMessageResponse extends ApiBaseSuccess {}
 
 export type ApiResponse<T = void> =
     | (T extends void ? ApiMessageResponse : ApiDataResponse<T>)
