@@ -83,7 +83,11 @@ export class AuthService {
                 tx
             );
 
-            const { password, updatedAt, ...userWithoutSensitiveData } = user;
+            const {
+                password: _password,
+                updatedAt: _updatedAt,
+                ...userWithoutSensitiveData
+            } = user;
 
             return { tokens, user: userWithoutSensitiveData };
         });

@@ -1,9 +1,10 @@
+import { Prisma } from '@realtime-chat/database';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ZodError } from 'zod';
 import { AppError } from '../lib/exceptions/AppError.js';
 
-export const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction) => {
+export const errorMiddleware = (err: Error, req: Request, res: Response, _next: NextFunction) => {
     if (err instanceof ZodError) {
         res.status(StatusCodes.BAD_REQUEST).json({
             status: 'fail',
@@ -24,7 +25,7 @@ export const errorMiddleware = (err: Error, req: Request, res: Response, next: N
     }
 
     // Prisma (P2002 - Unique constraint)
-    if ((err as any).code === 'P2002') {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
         res.status(StatusCodes.CONFLICT).json({
             status: 'fail',
             message: 'Resource already exists (unique constraint)',

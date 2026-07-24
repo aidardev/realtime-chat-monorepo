@@ -1,6 +1,6 @@
 import { prisma } from '@realtime-chat/database';
 import { SearchInput, User } from '@realtime-chat/schema';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { StatusCodes } from 'http-status-codes';
 import path from 'path';
 import { conversationUserSelect, publicUserSelect } from '../lib/db-selects/user.select.js';
@@ -47,15 +47,14 @@ class UserService {
         if (oldAvatarUrl) {
             try {
                 const fileName = path.basename(oldAvatarUrl);
-
                 const filePath = path.join(process.cwd(), 'public', 'uploads', 'avatars', fileName);
 
-                fs.unlink(filePath, (err) => {
-                    if (err) throw err;
-                    console.log(`Old avatar deleted: ${fileName}`);
-                });
-            } catch (error: any) {
-                if (error.code === 'ENOENT') {
+                await fs.unlink(filePath);
+                console.log(`Old avatar deleted: ${fileName}`);
+            } catch (error: unknown) {
+                const err = error as NodeJS.ErrnoException;
+
+                if (err.code === 'ENOENT') {
                     console.warn('Old avatar was not found on disk. Skipping deletion');
                 } else {
                     console.error('Error deleting old avatar:', error);

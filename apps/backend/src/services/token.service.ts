@@ -74,7 +74,7 @@ class TokenService {
     validateAccessToken(token: string): DecodedToken | null {
         try {
             return jwt.verify(token, process.env.JWT_ACCESS_SECRET!) as DecodedToken;
-        } catch (e) {
+        } catch {
             return null;
         }
     }
@@ -82,7 +82,7 @@ class TokenService {
     validateRefreshToken(token: string): DecodedToken | null {
         try {
             return jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as DecodedToken;
-        } catch (e) {
+        } catch {
             return null;
         }
     }
