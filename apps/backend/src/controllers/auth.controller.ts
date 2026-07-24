@@ -1,7 +1,7 @@
 import { LoginSchema, RegisterSchema } from '@realtime-chat/schema';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { REFRESH_COOKIE_OPTIONS } from '../config/cookie.config.js';
+import { BASE_COOKIE_OPTIONS, REFRESH_COOKIE_OPTIONS } from '../config/cookie.config.js';
 import { AppError } from '../lib/exceptions/AppError.js';
 import { authService } from '../services/auth.service.js';
 
@@ -72,9 +72,7 @@ export class AuthController {
 
         await authService.logout(refreshToken);
 
-        const { maxAge, ...clearOptions } = REFRESH_COOKIE_OPTIONS;
-
-        res.clearCookie('refreshToken', clearOptions);
+        res.clearCookie('refreshToken', BASE_COOKIE_OPTIONS);
 
         res.status(StatusCodes.OK).json({
             status: 'success',
