@@ -1,10 +1,10 @@
 import type { ConversationDetails } from '@realtime-chat/schema';
 import { getConversationContext, type ConversationContext } from './get-conversation-context';
 
-export interface ConversationHeaderInfo extends Pick<
+export type ConversationHeaderInfo = Pick<
     ConversationContext,
     'isGroup' | 'title' | 'avatar' | 'avatarFallback'
-> {}
+>;
 
 export function getConversationHeaderInfo(
     conversation: ConversationDetails,

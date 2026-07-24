@@ -13,14 +13,18 @@ export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryEr
 /**
  * Type predicate: проверяет, соответствует ли data нашему формату ApiErrorResponse
  */
-function isApiErrorData(data: unknown): data is ApiErrorResponse {
-    return (
-        typeof data === 'object' &&
-        data !== null &&
-        'message' in data &&
-        // Проверяем, что message - строка
-        typeof (data as any).message === 'string'
-    );
+export function isApiErrorData(data: unknown): data is ApiErrorResponse {
+    if (typeof data !== 'object' || data === null) {
+        return false;
+    }
+
+    const value = data as Record<string, unknown>;
+
+    const hasValidStatus = value.status === 'fail' || value.status === 'error';
+    const hasValidMessage = typeof value.message === 'string';
+    const hasValidErrors = value.errors === undefined || Array.isArray(value.errors);
+
+    return hasValidStatus && hasValidMessage && hasValidErrors;
 }
 
 export const handleApiError = <T extends FieldValues>(
@@ -34,7 +38,7 @@ export const handleApiError = <T extends FieldValues>(
         // 2. Проверяем, что сервер вернул ошибку в нашем ожидаемом формате
         if (isApiErrorData(errorData)) {
             // А. Если есть детальные ошибки полей (обычно статус 400 / ZodError)
-            if (errorData.errors && Array.isArray(errorData.errors)) {
+            if (errorData.errors && errorData.errors.length > 0) {
                 errorData.errors.forEach((err) => {
                     setError(err.path as Path<T>, {
                         type: 'server',
@@ -50,7 +54,7 @@ export const handleApiError = <T extends FieldValues>(
                 });
             }
         } else {
-            // В. Сервер вернул что-то странное (не JSON, или HTML страницу ошибки nginx)
+            // В. Сервер вернул что-то странное (не JSON, plain text и т.д.)
             console.error('Unknown API Error Format:', error);
             toast.error('Something went wrong on the server');
             return;

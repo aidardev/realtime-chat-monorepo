@@ -1,7 +1,7 @@
 import { useStartConversationMutation } from '@/entities/conversation';
 import { showApiErrorToast } from '@/shared/lib/show-api-error-toast';
 import { ConversationRequestSchema, type PublicUser } from '@realtime-chat/schema';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 type ValidationErrors = {
@@ -17,18 +17,6 @@ export function useCreateGroupConversation(onSuccess?: () => void) {
     const [startConversation, { isLoading }] = useStartConversationMutation();
 
     const isValid = selectedUsers.length >= 2 && groupName.trim().length > 0;
-
-    useEffect(() => {
-        if (errors.name) {
-            setErrors((prev) => ({ ...prev, name: undefined }));
-        }
-    }, [groupName]);
-
-    useEffect(() => {
-        if (errors.userIds) {
-            setErrors((prev) => ({ ...prev, userIds: undefined }));
-        }
-    }, [selectedUsers]);
 
     async function handleCreateGroup() {
         setErrors({});
@@ -67,12 +55,23 @@ export function useCreateGroupConversation(onSuccess?: () => void) {
         }
     }
 
+    function handleGroupNameChange(value: string) {
+        setGroupName(value);
+        if (errors.name) {
+            setErrors((prev) => ({ ...prev, name: undefined }));
+        }
+    }
+
     function toggleUser(user: PublicUser) {
         setSelectedUsers((prev) => {
             return prev.some((u) => u.id === user.id)
                 ? prev.filter((u) => u.id !== user.id)
                 : [...prev, user];
         });
+
+        if (errors.userIds) {
+            setErrors((prev) => ({ ...prev, userIds: undefined }));
+        }
     }
 
     function isUserToggled(user: PublicUser) {
@@ -87,7 +86,7 @@ export function useCreateGroupConversation(onSuccess?: () => void) {
 
     return {
         groupName,
-        setGroupName,
+        setGroupName: handleGroupNameChange,
         selectedUsers,
         toggleUser,
         isUserToggled,

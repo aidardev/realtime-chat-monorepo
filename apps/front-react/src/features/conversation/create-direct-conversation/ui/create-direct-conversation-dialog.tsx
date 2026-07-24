@@ -85,7 +85,7 @@ export function CreateDirectConversationDialog({
                         <div className="py-10 text-center">
                             <p className="text-sm font-medium">No users found</p>
                             <p className="text-xs text-muted-foreground">
-                                No matches for "{searchTerm}"
+                                No matches for &quot;{searchTerm}&quot;
                             </p>
                         </div>
                     )}

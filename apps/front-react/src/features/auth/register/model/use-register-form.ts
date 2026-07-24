@@ -34,7 +34,13 @@ export const useRegisterForm = () => {
     }, [form.watch, form.formState.errors.root, form.clearErrors]);
 
     const onSubmit = async (values: RegisterFormInput) => {
-        const { password2, ...data } = values;
+        const data = {
+            email: values.email,
+            username: values.username,
+            name: values.name,
+            password: values.password,
+        };
+
         try {
             const res = await register(data).unwrap();
             dispatch(

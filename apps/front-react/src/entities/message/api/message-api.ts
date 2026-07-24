@@ -29,7 +29,9 @@ export const messageApi = baseApi.injectEndpoints({
                     await cacheDataLoaded;
 
                     socketService.socket?.on('message:new', handleNewMessage);
-                } catch (error) {}
+                } catch (error) {
+                    console.error('Failed to attach message socket listener:', error);
+                }
 
                 await cacheEntryRemoved;
 
@@ -61,7 +63,9 @@ export const messageApi = baseApi.injectEndpoints({
                             draft.hasMore = olderMessages.hasMore;
                         })
                     );
-                } catch {}
+                } catch (error) {
+                    console.error('Failed to load more messages:', error);
+                }
             },
         }),
         getTypingUsers: build.query<string[], string>({
@@ -98,7 +102,9 @@ export const messageApi = baseApi.injectEndpoints({
 
                     socketService.socket?.off('typing:start', handleStart);
                     socketService.socket?.off('typing:stop', handleStop);
-                } catch {}
+                } catch {
+                    // Cache entry was removed before it finished loading.
+                }
             },
         }),
     }),
