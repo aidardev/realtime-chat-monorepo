@@ -32,6 +32,10 @@
         "check-types": {
             "dependsOn": ["^check-types"]
         },
+        "test": {
+            "dependsOn": ["^build"],
+            "outputs": ["coverage/**"]
+        },
         "dev": {
             "dependsOn": ["^build"],
             "cache": false,

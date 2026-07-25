@@ -6,9 +6,10 @@
         "dev": "turbo run dev",
         "lint": "turbo run lint",
         "check-types": "turbo run check-types",
+        "test": "turbo run test",
+        "quality": "pnpm format:check && pnpm lint && pnpm check-types && pnpm test",
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-        "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-        "quality": "pnpm format:check && pnpm lint && pnpm check-types"
+        "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
     },
     "devDependencies": {
         "prettier": "^3.7.4",
